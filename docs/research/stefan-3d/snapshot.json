@@ -1,0 +1,4845 @@
+{
+  "statistics": {
+    "botName": "Stefan 3d",
+    "teamName": "Солидный состав",
+    "rating": 1676.7425951203556,
+    "place": 1,
+    "matchCount": 125,
+    "winCount": 94,
+    "drawCount": 0,
+    "lossCount": 31,
+    "endReasons": [
+      {
+        "endReason": "FLEET_DESTROYED",
+        "matchCount": 125,
+        "winCount": 94
+      }
+    ],
+    "shotCount": 6506,
+    "hitCount": 2434,
+    "shotsToSinkFleet": 52.148936170212764,
+    "opponentShotCount": 6123,
+    "opponentHitCount": 2019,
+    "modifierMatchCount": 0,
+    "rules": [
+      {
+        "modifier": null,
+        "matchCount": 125,
+        "winCount": 94
+      }
+    ],
+    "bonusMatchCount": 0,
+    "bonuses": [
+      {
+        "bonus": "DISTANCE",
+        "useCount": 0
+      },
+      {
+        "bonus": "SONAR",
+        "useCount": 0
+      },
+      {
+        "bonus": "SALVO",
+        "useCount": 0
+      },
+      {
+        "bonus": "SHIELD",
+        "useCount": 0
+      },
+      {
+        "bonus": "MINE",
+        "useCount": 0
+      }
+    ],
+    "achievements": []
+  },
+  "journalEntries": [
+    {
+      "kind": "BOT_CREATED",
+      "occurredAt": "2026-10-10T09:02:23.140895Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": "Бот 1",
+      "idle": null
+    },
+    {
+      "kind": "BOT_RENAMED",
+      "occurredAt": "2026-10-10T09:22:58.253092Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": "Бот 1",
+      "botName": "Stefan 3d",
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:27:54.207977Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:30:05.404979Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:30:06.484684Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:30:06.683782Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "MEDIUM",
+        "opponentName": "Средний"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:30:07.063667Z",
+      "match": {
+        "matchId": "07723580-6142-446c-998e-44364af3df69",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Средний",
+          "botName": null,
+          "builtInBot": "MEDIUM"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:30:14.215075Z",
+        "ratingChange": -8.490204427886766,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:30:19.626754Z",
+      "match": {
+        "matchId": "ef2ad24d-6780-4767-8603-34a7fabb48d3",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Средний",
+          "botName": null,
+          "builtInBot": "MEDIUM"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:30:26.425242Z",
+        "ratingChange": 1.6394111633659803,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:30:26.524202Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "TRAINING",
+        "opponent": "MEDIUM",
+        "opponentName": "Средний"
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:30:31.672955Z",
+      "match": {
+        "matchId": "2f6c4b00-d972-4e15-86bb-cbb8c1deb87b",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:30:38.495561Z",
+        "ratingChange": -4.901421935300243,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:30:43.71951Z",
+      "match": {
+        "matchId": "136adeca-fe02-464c-a37f-df160a63b460",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:30:48.745552Z",
+        "ratingChange": -4.76051827712305,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:30:53.762397Z",
+      "match": {
+        "matchId": "b4cb3f89-c1df-4124-9512-3aed48f2ef54",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:30:58.607705Z",
+        "ratingChange": -4.624027190928387,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:30:58.71266Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "mode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:35:41.392048Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:35:42.254984Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:35:42.349007Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "MEDIUM",
+        "opponentName": "Средний"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:35:42.430215Z",
+      "match": {
+        "matchId": "5f3a6f07-d07a-470c-997d-3d4b2ae77723",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Средний",
+          "botName": null,
+          "builtInBot": "MEDIUM"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:35:50.028648Z",
+        "ratingChange": 1.7281174125218168,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:35:55.468364Z",
+      "match": {
+        "matchId": "05ba123c-ea03-4d96-a89c-646d166b68a6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Средний",
+          "botName": null,
+          "builtInBot": "MEDIUM"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:36:02.950171Z",
+        "ratingChange": 1.6998618227170237,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:36:03.049282Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "TRAINING",
+        "opponent": "MEDIUM",
+        "opponentName": "Средний"
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:36:08.008123Z",
+      "match": {
+        "matchId": "f9a33c41-afb3-4c59-9efb-650e7bc171d0",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:36:14.686359Z",
+        "ratingChange": 5.459144294833703,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:36:20.045231Z",
+      "match": {
+        "matchId": "4eebfd7c-7227-4f65-b32b-6395119d4444",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:36:27.561284Z",
+        "ratingChange": 5.302943126665949,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:36:32.583132Z",
+      "match": {
+        "matchId": "f91ad088-5ea2-48f5-852b-2cce7e5f6098",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:36:40.418353Z",
+        "ratingChange": 5.150638070898444,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:36:40.511372Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "mode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:37:56.000173Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:37:56.880182Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:37:56.972258Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:37:57.328812Z",
+      "match": {
+        "matchId": "2c1396b4-a8b0-43e7-8c08-9a8ae1db0805",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:38:02.920699Z",
+        "ratingChange": -4.925276479768463,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:38:08.370631Z",
+      "match": {
+        "matchId": "0c537975-ac7a-43ca-9408-84bb782661b9",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:38:15.108059Z",
+        "ratingChange": 5.216354752190444,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:38:20.405853Z",
+      "match": {
+        "matchId": "72b20253-4006-4349-ad8f-35853831e27a",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:38:26.298367Z",
+        "ratingChange": 5.066347283340002,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:38:31.448089Z",
+      "match": {
+        "matchId": "1407583d-600b-48ff-87ed-c9f07939123b",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:38:39.082727Z",
+        "ratingChange": -5.152013213014169,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:38:44.500236Z",
+      "match": {
+        "matchId": "b450a8fa-762e-4da8-a476-687794c36db7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:38:50.032103Z",
+        "ratingChange": 4.996226785681137,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:38:55.039483Z",
+      "match": {
+        "matchId": "1c42b466-afb1-4bcd-b6f4-e3872f365fc6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:01.832689Z",
+        "ratingChange": -5.217971155042775,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:39:07.084926Z",
+      "match": {
+        "matchId": "bcfa1151-ae9b-4dfd-a491-e01aa96f902e",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:13.284017Z",
+        "ratingChange": -5.067919933744964,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:39:18.626468Z",
+      "match": {
+        "matchId": "7eb4ab82-46ef-4538-a364-4872556aa575",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:25.470011Z",
+        "ratingChange": 5.007309013274814,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:39:30.673386Z",
+      "match": {
+        "matchId": "776018fa-c66e-4a33-b5ac-8250af23cdcd",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:35.942789Z",
+        "ratingChange": -5.136778785920147,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:39:41.212099Z",
+      "match": {
+        "matchId": "76b4f675-bb61-4d85-9ec2-b9191c280821",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:47.902964Z",
+        "ratingChange": -5.057591372551692,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:39:53.262309Z",
+      "match": {
+        "matchId": "b30f6feb-fd57-4d1a-9d80-fa0d9808b4fa",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:39:59.521937Z",
+        "ratingChange": 5.087966184103394,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:40:04.806753Z",
+      "match": {
+        "matchId": "a2534527-238d-40fc-899a-aa68c289146d",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:40:12.425289Z",
+        "ratingChange": 4.87490291306011,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:40:17.859327Z",
+      "match": {
+        "matchId": "7a96e5fe-85d4-48bd-8d87-3ec68a2d7958",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:40:23.812034Z",
+        "ratingChange": 4.734814885328383,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:40:28.90332Z",
+      "match": {
+        "matchId": "480355ec-657e-49b5-a4a4-0b5d064bed52",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:40:34.635987Z",
+        "ratingChange": 4.599149007345773,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:40:39.953316Z",
+      "match": {
+        "matchId": "3163d4f1-4853-44d4-bf46-f972c52415d4",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:40:44.265496Z",
+        "ratingChange": 4.406867311015613,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:40:49.495672Z",
+      "match": {
+        "matchId": "7a0bde6b-c985-4d68-baac-6879bfd44fd4",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:40:57.362019Z",
+        "ratingChange": 4.282214254936308,
+        "timedOutTurnCount": 1,
+        "rejectionCount": 1,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:02.545646Z",
+      "match": {
+        "matchId": "43047a10-aa5e-45fd-b5c0-c89251f39749",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:41:10.374884Z",
+        "ratingChange": 4.245322178584275,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:15.604498Z",
+      "match": {
+        "matchId": "092ddd6d-6e05-41ab-954d-daef852146e5",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:41:21.362754Z",
+        "ratingChange": 4.1263780765219495,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:26.651197Z",
+      "match": {
+        "matchId": "d267a4b9-784f-4851-8f19-a22fcb40cef7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:41:33.737955Z",
+        "ratingChange": 4.093525135155222,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:39.204301Z",
+      "match": {
+        "matchId": "05fa919b-afd4-4924-8c48-e060172de549",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:41:42.52239Z",
+        "ratingChange": 3.9800821731864167,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:47.742158Z",
+      "match": {
+        "matchId": "4f2a8fae-9fda-49a2-9be7-7bd85b737f62",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:41:52.316599Z",
+        "ratingChange": -6.129177464377338,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:41:57.788897Z",
+      "match": {
+        "matchId": "fa6ae157-2bfd-42d5-8dbc-64ae13beb969",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:01.997158Z",
+        "ratingChange": -5.960488735223293,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:42:07.334106Z",
+      "match": {
+        "matchId": "469d216b-2486-4877-bbf9-52226e552d60",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:14.302754Z",
+        "ratingChange": -5.714446386541815,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:42:19.383639Z",
+      "match": {
+        "matchId": "73cccf9c-dc5a-4929-a4b1-80fe39c6a821",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:25.566771Z",
+        "ratingChange": -5.552627298687428,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:42:30.931214Z",
+      "match": {
+        "matchId": "fe0a9b6c-d572-4884-944e-841d172abe6c",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:35.811252Z",
+        "ratingChange": 4.6057434099571415,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:42:40.973576Z",
+      "match": {
+        "matchId": "dc7aa4cf-b619-489e-afe2-2d9770075900",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:47.62388Z",
+        "ratingChange": -5.525690754196607,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:42:53.025718Z",
+      "match": {
+        "matchId": "329a8755-cddf-43e0-b268-bcf1dba7353a",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:42:58.54313Z",
+        "ratingChange": -5.367932259990658,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:43:03.594489Z",
+      "match": {
+        "matchId": "fd240d39-c7ff-46e4-a50d-608ec28cbe9d",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:43:07.024416Z",
+        "ratingChange": 4.786033723596514,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:43:12.130415Z",
+      "match": {
+        "matchId": "af6118fd-a6de-400b-a1d8-223cc35eaa9a",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:43:18.612184Z",
+        "ratingChange": 4.7985294677148005,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:43:23.676732Z",
+      "match": {
+        "matchId": "f814ced1-6d8d-45c9-afe2-4f15525fc5e9",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:43:31.9123Z",
+        "ratingChange": 4.806213872068423,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:43:32.011586Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "mode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:48:36.412704Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:48:37.357916Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:49:29.504484Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:49:29.7844Z",
+      "match": {
+        "matchId": "f44a5710-9075-4e59-954f-1b973b21d982",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:49:36.889023Z",
+        "ratingChange": 4.938032245033255,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:49:42.351422Z",
+      "match": {
+        "matchId": "5bfe95f5-5b2d-4110-aff0-9a179cf14110",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:49:49.580918Z",
+        "ratingChange": 4.864786537665765,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:49:54.927533Z",
+      "match": {
+        "matchId": "947d9441-7d2b-4b81-bfb8-c551b8d28aa7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:50:01.528781Z",
+        "ratingChange": 4.792733305706167,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:50:07.005575Z",
+      "match": {
+        "matchId": "c00633f6-1c5c-4e08-93bd-b833ee2a5549",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:50:14.55104Z",
+        "ratingChange": 4.721879294669789,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:50:19.567362Z",
+      "match": {
+        "matchId": "b02b0286-09e4-4de1-8fe8-2bdbea8df96e",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:50:25.271383Z",
+        "ratingChange": 4.509338610221125,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:50:25.37454Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:51:21.803668Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:51:21.901736Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:51:22.346877Z",
+      "match": {
+        "matchId": "0b9f2b94-0b23-44a7-94f7-6436b7efa1f1",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:51:29.968719Z",
+        "ratingChange": 4.44288300427039,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:51:35.409347Z",
+      "match": {
+        "matchId": "a40ec6ad-d4dd-423e-8dcb-3080f7451a9c",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:51:42.101125Z",
+        "ratingChange": 4.384093112774315,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:51:47.461015Z",
+      "match": {
+        "matchId": "8de063dd-3380-4e0b-b2de-6cf3d23af9e9",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:51:52.702047Z",
+        "ratingChange": 4.326102905110015,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:51:58.007755Z",
+      "match": {
+        "matchId": "c1d84dd7-e115-47bc-813b-b4314b6e5283",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:52:03.635346Z",
+        "ratingChange": -5.731080755367532,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:52:09.05484Z",
+      "match": {
+        "matchId": "b6de6391-2fb9-4638-8e7a-a83fe5ebc747",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:52:15.60114Z",
+        "ratingChange": 4.493458863915942,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:52:15.7149Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:52:19.420257Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:52:19.614068Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:52:20.619234Z",
+      "match": {
+        "matchId": "28638f0d-344c-4771-abd9-bed79821b510",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:52:30.253865Z",
+        "ratingChange": -5.572842076209161,
+        "timedOutTurnCount": 4,
+        "rejectionCount": 4,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:52:35.688054Z",
+      "match": {
+        "matchId": "53fd0ec0-bc63-4fff-a4c3-c500be19a1fc",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:52:41.856526Z",
+        "ratingChange": -5.354996886018274,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:52:47.24766Z",
+      "match": {
+        "matchId": "6bab7e99-1b99-419e-9356-cb92e5fd0e97",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:52:55.483975Z",
+        "ratingChange": 4.855236493740086,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:53:00.828722Z",
+      "match": {
+        "matchId": "6480eccc-bf03-4fc4-8953-1676d4531b59",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:53:06.112188Z",
+        "ratingChange": -5.371707369646863,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:53:11.38423Z",
+      "match": {
+        "matchId": "38af0cf9-ef8b-43d7-bcbb-cfd85d305bd7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:53:17.617309Z",
+        "ratingChange": 4.782353373248245,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:53:17.735307Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:53:25.894681Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:53:26.011166Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:53:26.453681Z",
+      "match": {
+        "matchId": "5d0fb1ab-e002-481d-8aac-2571859b4761",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:53:32.73245Z",
+        "ratingChange": -5.240116918749277,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:53:38.007256Z",
+      "match": {
+        "matchId": "a2360e6c-b26d-4a63-a67e-f19092ea696d",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:53:44.300047Z",
+        "ratingChange": 4.820868674609237,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:53:44.405292Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:55:31.641715Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:55:31.732327Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:55:32.126424Z",
+      "match": {
+        "matchId": "3180f87a-1bb6-4de5-8d12-aaa3f8b6e6ff",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:55:38.051033Z",
+        "ratingChange": 5.0990697843800215,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:55:43.204481Z",
+      "match": {
+        "matchId": "37ffef0a-82c0-4f94-b2e1-51d9626b6267",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:55:50.656584Z",
+        "ratingChange": -5.006376894494959,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:55:55.789218Z",
+      "match": {
+        "matchId": "c6bc9dd4-f810-4e34-a7d5-da197c028ac2",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:02.413703Z",
+        "ratingChange": 5.175454306344747,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:56:07.858147Z",
+      "match": {
+        "matchId": "a7eb1a90-6797-41d7-b95a-bdb7e04b8e7a",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:14.547968Z",
+        "ratingChange": 5.145914341549519,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:56:19.919884Z",
+      "match": {
+        "matchId": "dc236cbd-ee13-40a4-a76a-ba9038325086",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:25.359241Z",
+        "ratingChange": 4.765344696390579,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:56:30.476247Z",
+      "match": {
+        "matchId": "a34c97f3-c20a-4138-8d44-5e9f9ecd3091",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:36.161085Z",
+        "ratingChange": 4.563400366963211,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:56:41.522782Z",
+      "match": {
+        "matchId": "4ceb7185-c400-47ed-ace9-823149d1a7c6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:47.20074Z",
+        "ratingChange": -5.628639699456569,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:56:52.571929Z",
+      "match": {
+        "matchId": "48257aec-4a75-49a2-8c88-e44445abf447",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:56:58.080782Z",
+        "ratingChange": 4.469733154271321,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:57:03.113434Z",
+      "match": {
+        "matchId": "686fac3d-38bb-4f34-8da3-7fd29fd2a196",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:57:08.270827Z",
+        "ratingChange": 4.425901910740696,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:57:13.658006Z",
+      "match": {
+        "matchId": "061a6593-5ab7-4a58-8f26-d6ae5cf61fbf",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:57:18.810597Z",
+        "ratingChange": 4.240783299654919,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:57:18.920394Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T09:57:52.830559Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T09:57:52.93203Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:57:53.393555Z",
+      "match": {
+        "matchId": "25468f9c-c9bd-4afc-80a3-54f82ed12d87",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:57:58.819245Z",
+        "ratingChange": 3.95728667217596,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:03.97135Z",
+      "match": {
+        "matchId": "c6131326-558c-407f-b9bd-7ac854c22e28",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:58:08.680878Z",
+        "ratingChange": 3.8056405660820225,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:14.037837Z",
+      "match": {
+        "matchId": "42c0081e-406a-48d7-8297-c1544cafb04e",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:58:18.670553Z",
+        "ratingChange": 3.7284972558819307,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:24.108142Z",
+      "match": {
+        "matchId": "0a97c821-6ad2-4541-a2ff-d4c71498e52b",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:58:30.063292Z",
+        "ratingChange": -6.284913233621399,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:35.187373Z",
+      "match": {
+        "matchId": "ecc7890e-ca47-40fe-945b-41c529b476c7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:58:42.088049Z",
+        "ratingChange": 3.9724673231414807,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:47.270539Z",
+      "match": {
+        "matchId": "a626cda7-5c94-44d3-ad8e-4aa595b50643",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:58:52.193878Z",
+        "ratingChange": 3.9492115502791494,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:58:57.340965Z",
+      "match": {
+        "matchId": "e135805c-3073-46c1-888b-e609e283df73",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:59:03.43337Z",
+        "ratingChange": 3.8563095609904217,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:59:08.918387Z",
+      "match": {
+        "matchId": "910f3d5e-ecc3-4eb5-86a5-20e737c71bc7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:59:14.98045Z",
+        "ratingChange": 3.8272254250459614,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:59:19.990966Z",
+      "match": {
+        "matchId": "224f580d-6b1a-49e6-9501-fd5b5acba86c",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:59:25.601028Z",
+        "ratingChange": 3.737651950455535,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T09:59:31.060849Z",
+      "match": {
+        "matchId": "17daebff-02b6-494e-bdc3-01ef000c76ca",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T09:59:36.582048Z",
+        "ratingChange": 3.4775020516976274,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T09:59:36.697285Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T10:00:11.61465Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T10:00:11.711594Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:00:11.821778Z",
+      "match": {
+        "matchId": "fa960124-010e-45fc-b8cc-6a22affaafcf",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:00:17.40098Z",
+        "ratingChange": 3.8321779399651836,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T10:00:17.519869Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T10:00:29.585228Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T10:00:29.691815Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:00:29.909877Z",
+      "match": {
+        "matchId": "24703c73-bda9-4a94-a157-b32273a4be19",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:00:35.520789Z",
+        "ratingChange": 3.6789952054117303,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T10:00:35.642657Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T10:00:40.956058Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T10:00:41.255306Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:00:41.467709Z",
+      "match": {
+        "matchId": "4b97c0af-68df-41d4-9fff-e697f01a8ec6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:00:47.092962Z",
+        "ratingChange": 3.7235071836041724,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:00:52.537825Z",
+      "match": {
+        "matchId": "db6cf138-1f01-4138-a22e-0080c34258df",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:00:58.363961Z",
+        "ratingChange": 3.6558397208513105,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:01:03.614278Z",
+      "match": {
+        "matchId": "7088f67b-0ea8-4da5-aaeb-43877fe7d3be",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:01:09.373492Z",
+        "ratingChange": 3.6968553214610775,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:01:14.694654Z",
+      "match": {
+        "matchId": "8d53271a-ce6c-425a-b4b4-6a35dc375ab7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:01:20.271492Z",
+        "ratingChange": -6.453390588894598,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:01:25.765876Z",
+      "match": {
+        "matchId": "27ef8a3e-e8fc-4b8a-8dd5-4ee4f436b7a4",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:01:31.650692Z",
+        "ratingChange": 3.7189145881380137,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:01:36.844644Z",
+      "match": {
+        "matchId": "785f6657-952d-409d-8c22-21dceef30776",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:01:43.586548Z",
+        "ratingChange": 3.569313794205172,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:01:48.925179Z",
+      "match": {
+        "matchId": "fa2d602b-ae6d-49ae-a8aa-97204d4c2ccf",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:01:56.079726Z",
+        "ratingChange": 3.512559244165574,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:01.516928Z",
+      "match": {
+        "matchId": "f76684eb-90c2-40d7-b416-b69a45e9053b",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:02:06.712113Z",
+        "ratingChange": 3.503540484985729,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:12.080668Z",
+      "match": {
+        "matchId": "116d5630-e863-4f4d-968b-4905534f3d62",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:02:17.654386Z",
+        "ratingChange": 3.4122964226020915,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:23.154003Z",
+      "match": {
+        "matchId": "8382d6dc-05ad-416b-ac51-7b0d32886456",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:02:28.785455Z",
+        "ratingChange": -6.723062720007679,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "DISCONNECTED",
+      "occurredAt": "2026-10-10T10:02:28.997659Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": "CLOSED_BY_BOT",
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "CONNECTED",
+      "occurredAt": "2026-10-10T10:02:36.110882Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MODE_CHANGED",
+      "occurredAt": "2026-10-10T10:02:36.203041Z",
+      "match": null,
+      "matchRecord": null,
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": {
+        "mode": "RANKING",
+        "opponent": null,
+        "opponentName": null
+      },
+      "mode": {
+        "mode": "TRAINING",
+        "opponent": "HARD",
+        "opponentName": "Сложный"
+      },
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:36.228241Z",
+      "match": {
+        "matchId": "0fabfbec-758b-40cb-848a-48222c9e1be9",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:02:42.801193Z",
+        "ratingChange": 3.401325677527076,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:47.826213Z",
+      "match": {
+        "matchId": "4447a8c1-fd23-4903-bc79-ba49451aa3fd",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:02:54.680676Z",
+        "ratingChange": 3.396320544652972,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:02:59.921423Z",
+      "match": {
+        "matchId": "ba5fccfb-0fd8-4525-a20e-c6a614c100f9",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:05.553136Z",
+        "ratingChange": 3.2620575089223225,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:03:11.003468Z",
+      "match": {
+        "matchId": "17503105-595e-42d9-9669-a2a7912bc537",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:16.089083Z",
+        "ratingChange": 3.1356746328712246,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:03:21.585632Z",
+      "match": {
+        "matchId": "2a46bf76-de5c-4b0a-9ae7-4240a3705d66",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:26.614308Z",
+        "ratingChange": 3.139328803714295,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:03:31.6659Z",
+      "match": {
+        "matchId": "fa7e68bb-edd4-4c40-8c5e-5288df332437",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:36.607066Z",
+        "ratingChange": 3.0185943700876985,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:03:41.749357Z",
+      "match": {
+        "matchId": "54b4034c-319d-420a-a431-4c1f93b449ac",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:47.499266Z",
+        "ratingChange": 2.9049793218993925,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:03:52.846171Z",
+      "match": {
+        "matchId": "12f11879-9392-4ed8-938d-fa70517c762a",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:03:58.882113Z",
+        "ratingChange": -7.201979649269429,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:04:03.917669Z",
+      "match": {
+        "matchId": "7276da9a-3890-4a1e-bb0f-bd6ee69b6ea7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:04:10.75475Z",
+        "ratingChange": 2.9284566182866865,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:04:16.025057Z",
+      "match": {
+        "matchId": "e31997e6-824c-45da-bfa5-3878646f3e83",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:04:21.264048Z",
+        "ratingChange": 2.939795450401136,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:04:26.613014Z",
+      "match": {
+        "matchId": "2eb47fbc-4342-4b28-8258-2a84eaba86a6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:04:34.083404Z",
+        "ratingChange": -7.092458419074214,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:04:39.219155Z",
+      "match": {
+        "matchId": "e1d4c4b6-88ae-4286-9479-b795ed0d194b",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:04:44.886365Z",
+        "ratingChange": -6.840966741436167,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:04:50.301539Z",
+      "match": {
+        "matchId": "bc415117-d847-49af-b767-a7326c423292",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:04:55.586089Z",
+        "ratingChange": 3.2836657319501397,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:00.880533Z",
+      "match": {
+        "matchId": "506d16f0-ba82-4e33-a973-93035612dbfe",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:05:07.782148Z",
+        "ratingChange": 3.2812757508346593,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:12.970427Z",
+      "match": {
+        "matchId": "2c546225-9da8-43f9-980c-72d4115ce5ec",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:05:17.949527Z",
+        "ratingChange": 3.151788033580172,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:23.042175Z",
+      "match": {
+        "matchId": "428718d3-aa02-4641-8814-3e8256406dc3",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:05:27.623919Z",
+        "ratingChange": 3.029987848076737,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:33.120712Z",
+      "match": {
+        "matchId": "d176e901-52ca-48ff-b895-c1e253bf8cb3",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:05:39.748727Z",
+        "ratingChange": 3.0356972147393235,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:45.22298Z",
+      "match": {
+        "matchId": "38e27b98-0beb-427f-b78d-84424ec73519",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:05:51.319703Z",
+        "ratingChange": -6.960332810905523,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:05:56.818223Z",
+      "match": {
+        "matchId": "89e2c3c7-a0d7-4899-814b-59145a6bd429",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:03.286392Z",
+        "ratingChange": 3.1634616395101034,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:06:08.401654Z",
+      "match": {
+        "matchId": "4881a2ee-13b4-462f-98ff-1b8b860f9151",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:13.600594Z",
+        "ratingChange": 3.03972056767974,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:06:18.986979Z",
+      "match": {
+        "matchId": "e9862294-518e-4705-8707-32d28f664b2d",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:24.193883Z",
+        "ratingChange": 3.04385810628255,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:06:29.585549Z",
+      "match": {
+        "matchId": "b1d642c5-29af-48cd-8940-c2ef2da78b52",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:36.51265Z",
+        "ratingChange": 2.9991750011261953,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:06:41.682785Z",
+      "match": {
+        "matchId": "9e9b0074-eb03-459c-be5e-07cfb3f54ca7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:47.404044Z",
+        "ratingChange": 3.002387157113043,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:06:52.768196Z",
+      "match": {
+        "matchId": "0e488db1-1bfa-468c-8d1c-481150450ba6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:06:58.77453Z",
+        "ratingChange": 2.884390505875425,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:03.858186Z",
+      "match": {
+        "matchId": "3a3fd24b-53be-4717-9471-0d46ff8336bb",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:07:09.184035Z",
+        "ratingChange": 2.7735764065632793,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:14.441961Z",
+      "match": {
+        "matchId": "0499d035-ae81-4173-b22d-f1bcd6095103",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:07:20.328896Z",
+        "ratingChange": 2.66945533492682,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:25.527111Z",
+      "match": {
+        "matchId": "0d6e2897-9464-4f3e-a0d6-a4ade597ae3f",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:07:31.196215Z",
+        "ratingChange": 2.6097471649467288,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:36.587118Z",
+      "match": {
+        "matchId": "fa47f223-c887-486a-b073-7afa2ee7fd5c",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:07:43.142021Z",
+        "ratingChange": 2.5522162090060077,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:48.171099Z",
+      "match": {
+        "matchId": "44f9ca30-0f99-4acd-afbb-dfa710697284",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:07:54.736108Z",
+        "ratingChange": 2.3999454017882558,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:07:59.768898Z",
+      "match": {
+        "matchId": "82e48360-424e-4516-8481-da216c546214",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:08:04.610171Z",
+        "ratingChange": 2.467402007430728,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:08:09.855289Z",
+      "match": {
+        "matchId": "9527f000-842c-4859-ba3c-8d96e3e9caf7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:08:14.89818Z",
+        "ratingChange": 2.4250380304433583,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:08:19.946434Z",
+      "match": {
+        "matchId": "f2be3503-8e6b-4e24-9bda-de3866804d5c",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:08:25.595894Z",
+        "ratingChange": 2.3160262462713055,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:08:31.015077Z",
+      "match": {
+        "matchId": "060040cb-1cce-41f1-b224-b6c5db5329a7",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:08:37.723679Z",
+        "ratingChange": 2.181840863511031,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:08:43.103719Z",
+      "match": {
+        "matchId": "97e7ef1e-55b1-431c-b7d3-a7dbbf439703",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:08:50.23151Z",
+        "ratingChange": 2.1554948445923507,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:08:55.705664Z",
+      "match": {
+        "matchId": "b0eb9153-0142-42a8-8987-0e338feb5e43",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "WIN",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:09:01.715316Z",
+        "ratingChange": 2.044765509869926,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:09:06.794194Z",
+      "match": {
+        "matchId": "6bb7963b-8691-4958-95f5-afd9ae8cccf6",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "FINISHED",
+        "outcome": "LOSS",
+        "endReason": "FLEET_DESTROYED",
+        "finishedAt": "2026-10-10T10:09:13.484485Z",
+        "ratingChange": -7.975159811139888,
+        "timedOutTurnCount": 0,
+        "rejectionCount": 0,
+        "rejectionLimitReached": false
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    },
+    {
+      "kind": "MATCH",
+      "occurredAt": "2026-10-10T10:09:18.906518Z",
+      "match": {
+        "matchId": "92e7a6cc-8be0-43bf-99fd-0a56016f2238",
+        "kind": "TRAINING",
+        "opponent": {
+          "kind": "BUILT_IN_BOT",
+          "name": "Сложный",
+          "botName": null,
+          "builtInBot": "HARD"
+        }
+      },
+      "matchRecord": {
+        "modifier": null,
+        "status": "IN_PROGRESS",
+        "outcome": null,
+        "endReason": null,
+        "finishedAt": null,
+        "ratingChange": null,
+        "timedOutTurnCount": null,
+        "rejectionCount": null,
+        "rejectionLimitReached": null
+      },
+      "bonusUse": null,
+      "disconnectReason": null,
+      "previousMode": null,
+      "mode": null,
+      "previousBotName": null,
+      "botName": null,
+      "idle": null
+    }
+  ]
+}
