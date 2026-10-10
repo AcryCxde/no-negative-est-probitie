@@ -49,3 +49,11 @@ def test_plain_ws_is_allowed_for_loopback_only() -> None:
 def test_unknown_mode_is_rejected() -> None:
     with pytest.raises(ConfigError):
         load_config(None, {"TOKEN": "t", "BOT_MODE": "TOURNAMENT"})
+
+
+def test_match_limit_is_optional_and_must_be_positive() -> None:
+    assert load_config(None, {"TOKEN": "t"}).max_matches is None
+    assert load_config(None, {"TOKEN": "t", "BOT_MATCHES": "10"}).max_matches == 10
+    for bad in ("0", "-3", "ten"):
+        with pytest.raises(ConfigError):
+            load_config(None, {"TOKEN": "t", "BOT_MATCHES": bad})

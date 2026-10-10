@@ -8,6 +8,7 @@ from pathlib import Path
 
 from seabattle.config import ConfigError, load_config
 from seabattle.connection import FatalConnectionError, run_forever
+from seabattle.journal import DirectoryJournal
 from seabattle.logs import setup_logging
 from seabattle.runner import BotRunner, ModeRequest
 from strategies.density import DensityStrategy
@@ -24,7 +25,13 @@ async def main() -> int:
         print(f"Ошибка настроек: {error}", file=sys.stderr)  # noqa: T201
         return 2
     setup_logging(config.log_level)
-    runner = BotRunner(DensityStrategy(), ModeRequest(config.mode, config.opponent))
+    journal = DirectoryJournal(Path(__file__).with_name("matches"))
+    runner = BotRunner(
+        DensityStrategy(),
+        ModeRequest(config.mode, config.opponent),
+        journal=journal,
+        max_matches=config.max_matches,
+    )
     task = asyncio.create_task(run_forever(config, runner))
     loop = asyncio.get_running_loop()
 

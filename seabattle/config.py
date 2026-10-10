@@ -33,6 +33,7 @@ class BotConfig:
     mode: BotMode
     opponent: BuiltInBot | None
     log_level: str
+    max_matches: int | None = None
 
 
 def read_env_file(path: Path) -> dict[str, str]:
@@ -63,7 +64,23 @@ def load_config(env_file: Path | None, environ: Mapping[str, str] | None = None)
         opponent = BuiltInBot(merged.get("BOT_OPPONENT", BuiltInBot.EASY))
     except ValueError as error:
         raise ConfigError(f"недопустимое значение настройки: {error}") from error
-    return BotConfig(Secret(token), url, mode, opponent, merged.get("LOG_LEVEL", "INFO").upper())
+    return BotConfig(
+        Secret(token),
+        url,
+        mode,
+        opponent,
+        merged.get("LOG_LEVEL", "INFO").upper(),
+        _parse_max_matches(merged.get("BOT_MATCHES", "")),
+    )
+
+
+def _parse_max_matches(raw: str) -> int | None:
+    """Пусто — играть до остановки вручную; число — остановиться после стольких партий."""
+    if not raw:
+        return None
+    if not raw.isdecimal() or int(raw) == 0:
+        raise ConfigError(f"BOT_MATCHES должен быть положительным целым, получено {raw!r}")
+    return int(raw)
 
 
 def _require_secure_url(url: str) -> None:

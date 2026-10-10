@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from random import Random
 from typing import Final, Protocol, assert_never
 
+from seabattle.journal import MatchJournal, NullJournal
 from seabattle.model import BotMode, BuiltInBot, Cell, Fleet, RuleModifier
 from seabattle.placement import PlacementError, random_fleet, validate_fleet
 from seabattle.protocol import (
@@ -72,12 +73,21 @@ class ModeRequest:
 class BotRunner:
     """Живёт дольше соединения; после обрыва партия перестраивается из MATCH_SNAPSHOT."""
 
-    def __init__(self, strategy: Strategy, mode: ModeRequest, rng: Random | None = None) -> None:
+    def __init__(
+        self,
+        strategy: Strategy,
+        mode: ModeRequest,
+        rng: Random | None = None,
+        journal: MatchJournal | None = None,
+        max_matches: int | None = None,
+    ) -> None:
+        self._journal = journal or NullJournal()
         self._strategy = strategy
         self._mode = mode
         self._rng = rng or Random()
         self._match: MatchState | None = None
         self._stopping = False
+        self._matches_left = max_matches
         self._shot_sent_at: float | None = None
 
     @property
@@ -104,7 +114,10 @@ class BotRunner:
                 message = parse_inbound(raw)
             except ProtocolError:
                 log.warning("Сообщение платформы не разобрано", exc_info=True)
+                self._journal.record("in", raw)
                 continue
+            self._open_journal(message)
+            self._journal.record("in", raw)
             try:
                 await self._handle(transport, message)
             except TransportClosedError:
@@ -151,6 +164,8 @@ class BotRunner:
             case MatchFinished(outcome=outcome, end_reason=reason):
                 log.info("Партия окончена", extra={"outcome": outcome, "end_reason": reason})
                 self._match = None
+                self._journal.finish()
+                self._count_finished_match()
             case ModeChanged(mode=mode):
                 log.info("Режим принят", extra={"mode": mode})
             case ModeRejected(mode=mode, reason=reason):
@@ -161,6 +176,14 @@ class BotRunner:
                 log.debug("Сообщение пропущено", extra={"kind": kind})
             case _:
                 assert_never(message)
+
+    def _count_finished_match(self) -> None:
+        if self._matches_left is None:
+            return
+        self._matches_left -= 1
+        if self._matches_left <= 0:
+            log.info("Заданное число партий сыграно")
+            self.request_stop()
 
     async def _place(self, transport: Transport) -> None:
         match = self._match
@@ -240,8 +263,19 @@ class BotRunner:
             log.debug("Выстрел подтверждён", extra={"rtt_ms": rtt_ms})
             self._shot_sent_at = None
 
+    def _open_journal(self, message: Inbound) -> None:
+        match message:
+            case MatchStarted(opponent=opponent, rules=rules):
+                self._journal.start(f"{opponent}-{rules.modifier or 'classic'}")
+            case MatchSnapshot(rules=rules):
+                self._journal.start(f"resumed-{rules.modifier or 'classic'}")
+            case _:
+                pass
+
     async def _send(self, transport: Transport, message: Outbound) -> None:
-        await transport.send(encode_outbound(message))
+        text = encode_outbound(message)
+        self._journal.record("out", text)
+        await transport.send(text)
 
 
 def _is_legal(match: MatchState, cell: Cell) -> bool:

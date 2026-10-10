@@ -163,3 +163,14 @@ def test_stop_without_a_match_returns_immediately() -> None:
     asyncio.run(runner.serve(transport))
     assert kinds(transport.sent) == ["CHANGE_MODE"]
     assert transport.frames == [TURN]
+
+
+def test_runner_stops_by_itself_after_the_requested_number_of_matches() -> None:
+    finished = '{"type":"MATCH_FINISHED","outcome":"WIN","endReason":"FLEET_DESTROYED"}'
+    frames = [match_started_json(), finished, match_started_json(), finished, match_started_json()]
+    transport = ScriptedTransport(frames)
+    runner = BotRunner(BaselineStrategy(), TRAINING, Random(1), max_matches=2)
+    asyncio.run(runner.serve(transport))
+    assert runner.stopping
+    assert kinds(transport.sent).count("PLACE") == 2
+    assert len(transport.frames) == 1
