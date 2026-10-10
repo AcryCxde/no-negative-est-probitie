@@ -10,9 +10,11 @@ from seabattle.config import ConfigError, load_config
 from seabattle.connection import FatalConnectionError, run_forever
 from seabattle.logs import setup_logging
 from seabattle.runner import BotRunner, ModeRequest
-from strategies.baseline import BaselineStrategy
+from strategies.density import DensityStrategy
 
 log = logging.getLogger("bot_1")
+
+DRAIN_SECONDS = 240  # партия длится не дольше 210 с
 
 
 async def main() -> int:
@@ -22,11 +24,21 @@ async def main() -> int:
         print(f"Ошибка настроек: {error}", file=sys.stderr)  # noqa: T201
         return 2
     setup_logging(config.log_level)
-    runner = BotRunner(BaselineStrategy(), ModeRequest(config.mode, config.opponent))
+    runner = BotRunner(DensityStrategy(), ModeRequest(config.mode, config.opponent))
     task = asyncio.create_task(run_forever(config, runner))
     loop = asyncio.get_running_loop()
+
+    def on_signal() -> None:
+        # Первый сигнал — доиграть идущую партию, повторный или по истечении срока — выйти сразу
+        if runner.stopping or not runner.match_active:
+            task.cancel()
+            return
+        runner.request_stop()
+        log.info("Остановка после партии", extra={"drain_seconds": DRAIN_SECONDS})
+        loop.call_later(DRAIN_SECONDS, task.cancel)
+
     for stop in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(stop, task.cancel)
+        loop.add_signal_handler(stop, on_signal)
     log.info("Бот запущен", extra={"mode": config.mode, "opponent": config.opponent})
     try:
         await task
@@ -35,6 +47,8 @@ async def main() -> int:
         return 1
     except asyncio.CancelledError:
         log.info("Остановка по сигналу")
+        return 0
+    log.info("Остановка после партии")
     return 0
 
 

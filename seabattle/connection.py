@@ -76,11 +76,13 @@ async def run_forever(
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     rng: random.Random | None = None,
 ) -> None:
-    """Держит бота на связи, пока не придёт фатальный отказ (`FatalConnectionError`)."""
+    """Держит бота на связи до фатального отказа (`FatalConnectionError`) или мягкой остановки."""
     jitter = rng or random.Random()
     attempt = 0
     while True:
         productive = await _session(config, runner)
+        if runner.stopping:
+            return
         attempt = 0 if productive else attempt + 1
         delay = retry_delay(attempt, jitter)
         log.info("Переподключение", extra={"delay": round(delay, 1), "attempt": attempt})
@@ -97,6 +99,7 @@ async def _session(config: BotConfig, runner: BotRunner) -> bool:
             ping_interval=PING_INTERVAL,
             ping_timeout=PING_TIMEOUT,
             max_size=MAX_FRAME_BYTES,
+            compression=None,
         ) as socket:
             log.info("Соединение открыто")
             transport = WebSocketTransport(socket)

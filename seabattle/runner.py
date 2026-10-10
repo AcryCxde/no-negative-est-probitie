@@ -70,19 +70,35 @@ class ModeRequest:
 
 
 class BotRunner:
-    """Живёт дольше соединения: состояние партии переживает обрыв и перестраивается из снимка."""
+    """Живёт дольше соединения; после обрыва партия перестраивается из MATCH_SNAPSHOT."""
 
     def __init__(self, strategy: Strategy, mode: ModeRequest, rng: Random | None = None) -> None:
         self._strategy = strategy
         self._mode = mode
         self._rng = rng or Random()
         self._match: MatchState | None = None
+        self._stopping = False
+        self._shot_sent_at: float | None = None
+
+    @property
+    def stopping(self) -> bool:
+        return self._stopping
+
+    @property
+    def match_active(self) -> bool:
+        return self._match is not None
+
+    def request_stop(self) -> None:
+        """Мягкая остановка: идущую партию доиграть, новое соединение не открывать."""
+        self._stopping = True
 
     async def serve(self, transport: Transport) -> None:
         """Обслуживает одно соединение до его закрытия (`TransportClosedError`)."""
+        # Идущая партия, если она есть, придёт первым сообщением MATCH_SNAPSHOT
+        self._match = None
         # Новое соединение стартует в RANKING, поэтому режим объявляем при каждом подключении
         await self._send(transport, ChangeMode(self._mode.mode, self._mode.opponent))
-        while True:
+        while not (self._stopping and self._match is None):
             raw = await transport.recv()
             try:
                 message = parse_inbound(raw)
@@ -122,6 +138,7 @@ class BotRunner:
             case ShotResolved(shot=shot):
                 if self._match is not None:
                     self._match.record_shot(shot)
+                self._log_round_trip()
             case OpponentShot(shot=shot):
                 if self._match is not None:
                     self._match.record_opponent_shot(shot)
@@ -208,6 +225,20 @@ class BotRunner:
                 "Запасной выстрел", extra={"reason": reason, "move_number": turn.move_number}
             )
         await self._send(transport, Shoot(cell))
+        self._shot_sent_at = time.monotonic()
+        log.debug(
+            "Ход сыгран",
+            extra={
+                "move_number": turn.move_number,
+                "think_ms": round((self._shot_sent_at - started) * 1000),
+            },
+        )
+
+    def _log_round_trip(self) -> None:
+        if self._shot_sent_at is not None:
+            rtt_ms = round((time.monotonic() - self._shot_sent_at) * 1000)
+            log.debug("Выстрел подтверждён", extra={"rtt_ms": rtt_ms})
+            self._shot_sent_at = None
 
     async def _send(self, transport: Transport, message: Outbound) -> None:
         await transport.send(encode_outbound(message))

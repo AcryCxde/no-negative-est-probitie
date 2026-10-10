@@ -52,8 +52,11 @@ python3 tools/docs_from_mhtml.py ~/Downloads/Battleships.mhtml
 ```bash
 uv sync
 uv run python -m bot_1          # токен берётся из bot_1/.env
+bot_1/run.sh                     # то же под caffeinate (Mac не уснёт) с перезапуском после падения
 uv run pytest && uv run ruff check seabattle strategies bot_1 tests && uv run mypy
 ```
+
+Ctrl+C или SIGTERM: бот доигрывает идущую партию (до 240 с) и выходит; повторный сигнал останавливает сразу.
 
 Настройки (в `bot_1/.env` или окружении): `TOKEN` (обязательно), `BOT_MODE` (`TRAINING` по умолчанию | `RANKING`), `BOT_OPPONENT` (`EASY` | `MEDIUM` | `HARD`, только для тренировки), `BOT_URL`, `LOG_LEVEL`. Режим отправляется при каждом подключении: новое соединение платформа начинает в `RANKING`.
 

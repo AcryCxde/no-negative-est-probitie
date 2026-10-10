@@ -137,3 +137,29 @@ def test_slow_strategy_does_not_cost_the_turn() -> None:
 
 def test_parser_roundtrip_of_scripted_frames() -> None:
     assert parse_inbound(TURN)
+
+
+def test_stop_is_deferred_until_the_running_match_finishes() -> None:
+    finished = '{"type":"MATCH_FINISHED","outcome":"WIN","endReason":"FLEET_DESTROYED"}'
+    runner = BotRunner(BaselineStrategy(), TRAINING, Random(1))
+
+    class StopDuringMatch(ScriptedTransport):
+        async def send(self, text: str) -> None:
+            await super().send(text)
+            if '"PLACE"' in text:
+                runner.request_stop()  # сигнал приходит, когда партия уже идёт
+
+    transport = StopDuringMatch([match_started_json(), TURN, finished, TURN])
+    asyncio.run(runner.serve(transport))  # возвращается сам, исключения нет
+    # ход в идущей партии сыгран, после её конца бот вышел и не ждёт новых ходов
+    assert kinds(transport.sent) == ["CHANGE_MODE", "PLACE", "SHOOT"]
+    assert transport.frames == [TURN]
+
+
+def test_stop_without_a_match_returns_immediately() -> None:
+    transport = ScriptedTransport([TURN])
+    runner = BotRunner(BaselineStrategy(), TRAINING, Random(1))
+    runner.request_stop()
+    asyncio.run(runner.serve(transport))
+    assert kinds(transport.sent) == ["CHANGE_MODE"]
+    assert transport.frames == [TURN]
