@@ -22,6 +22,7 @@ class BonusBag:
         self.own_fleet: list[set[Cell]] = []
         self.opponent_shot_cells: set[Cell] = set()
         self.opponent_hit_cells: set[Cell] = set()
+        self.opponent_shots = 0
         self.pending: dict | None = None
         self.forced: Cell | None = None
         self.salvo_ready = False
@@ -56,6 +57,7 @@ class BonusBag:
     def note_opponent_shot(self, event: dict) -> None:
         cell = parse_cell(event["cell"])
         self.opponent_shot_cells.add(cell)
+        self.opponent_shots += 1
         if event.get("result") in {"HIT", "SUNK"}:
             self.opponent_hit_cells.add(cell)
         if event.get("result") == "MINE":
@@ -160,8 +162,14 @@ class BonusBag:
     def _hunger_choice(self, shots_left: int) -> tuple[str, dict]:
         # Every bonus but SALVO spends a shot from the small limit, and SALVO adds
         # no shots. SHIELD only while the opponent is finishing a wounded ship of ours.
-        if self.uses["SHIELD"] > 0 and not self.shield_active and shots_left > 1 and self._open_threat():
-            return self._bonus("SHIELD", None, "hunger shield: opponent finishing our wounded ship")
+        min_accuracy = getattr(self.strategy, "shield_min_accuracy", 0.0)
+        accuracy = len(self.opponent_hit_cells) / self.opponent_shots if self.opponent_shots else 0.0
+        targeting_allowed = getattr(self.strategy, "shield_while_targeting", True) or not self.strategy.hits
+        if (self.uses["SHIELD"] > 0 and not self.shield_active and shots_left > 1 and self._open_threat()
+                and targeting_allowed
+                and (not min_accuracy or self.opponent_shots >= 4 and accuracy > min_accuracy)):
+            return self._bonus("SHIELD", None, f"hunger shield: opponent finishing our wounded ship; "
+                                               f"accuracy={accuracy:.2f}")
         return self._shoot("hunger: bonuses cost shots")
 
     def _open_threat(self) -> bool:

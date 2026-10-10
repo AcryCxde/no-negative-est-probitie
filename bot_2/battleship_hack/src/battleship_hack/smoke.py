@@ -11,7 +11,8 @@ from websockets.asyncio.server import serve
 
 from .bonuses import BonusBag
 from .client import Protocol, run, same_opponent
-from .game import Baseline, Density, FleetMC, FleetMCExact, FleetMCDuel, FleetMCDuelV2, FleetMCInterior, FleetMCSchrodinger, FleetMCSchrodingerRim, FleetMCSchrodingerRimV2, HardEdge, HardQuadrants, STRATEGIES, cell_json, is_duel, is_miss_race, is_musketeers, neighbors, place, parse_cell, validate_placement
+from .game import Baseline, Density, FleetMC, FleetMCExact, FleetMCDuel, FleetMCDuelV2, FleetMCInterior, FleetMCSchrodinger, FleetMCSchrodingerRim, FleetMCSchrodingerRimV2, FleetMCHunger, FleetMCHungerHeat, FleetMCHungerV2, HardEdge, HardQuadrants, STRATEGIES, cell_json, is_duel, is_miss_race, is_musketeers, neighbors, place, parse_cell, validate_placement
+from .heat import HeatStore
 from .telemetry import Journal, ingest, report
 
 RULES = {"rows": 6, "columns": 6, "fleet": [{"length": 3, "count": 1}, {"length": 2, "count": 1}, {"length": 1, "count": 1}],
@@ -317,6 +318,94 @@ async def smoke():
         await protocol.handle(Socket(), {"type": "MATCH_STARTED", "rules": cat_rules,
             "opponent": {"kind": "REMOTE_BOT", "teamName": "Team"}})
         assert isinstance(protocol.strategy, FleetMCSchrodingerRimV2)
+        hunger_rules = {**RULES, "modifier": "HUNGER_GAMES", "shotLimitPerPlayer": 20}
+        for team in ("Team", "Банька Парилка"):
+            protocol = Protocol({**config, "strategy": "ranking-auto"}, regression_journal, 42)
+            hunger_socket = Socket()
+            await protocol.handle(hunger_socket, {"type": "MATCH_STARTED", "rules": hunger_rules,
+                "bonuses": [{"bonus": "SHIELD", "uses": 1}, {"bonus": "SONAR", "uses": 1}],
+                "opponent": {"kind": "REMOTE_BOT", "teamName": team}})
+            assert protocol.strategy_name == "fleet-mc-hunger" and isinstance(protocol.strategy, FleetMCHunger)
+            ships = hunger_socket.messages[-1]["ships"]
+            validate_placement(hunger_rules, ships)
+            edge = (0, hunger_rules["rows"] - 1)
+            multi_rim = [all(cell["row"] in edge or cell["column"] in edge for cell in ship["cells"])
+                         for ship in ships if len(ship["cells"]) > 1]
+            assert not any(multi_rim) if team == "Банька Парилка" else all(multi_rim), (team, ships)
+            await protocol.handle(hunger_socket, {"type": "TURN_REQUESTED", "moveNumber": 1,
+                "shotsLeft": 20, "shotsLeftInTurn": 1})
+            assert hunger_socket.messages[-1]["type"] == "SHOOT" and protocol.strategy.shots_left == 20
+        protocol.bonuses.note_opponent_shot({"cell": cell_json(next(iter(protocol.bonuses.own_ships))), "result": "HIT"})
+        kind, payload = protocol.bonuses.choose(shots_left=10, shots_left_in_turn=1, move_number=5)
+        assert kind == "USE_BONUS" and payload["bonus"] == "SHIELD", (kind, payload)
+        hunger = FleetMCHunger(hunger_rules, 3)
+        hunger.shots_left = 20
+        assert hunger.ship_value(4) > hunger.ship_value(2) > hunger.ship_value(1) == 1.0
+        hunger.shots_left = 1
+        assert hunger.ship_value(4) == 1.0
+        print("PASS: HUNGER_GAMES auto-switches to fleet-mc-hunger, team-aware placement, shield-only bonuses")
+        store = HeatStore()
+        rim_shots = [((0, c), "MISS") for c in range(6)] + [((5, c), "MISS") for c in range(6)]
+        store.add("Rim team", rim_shots, "HUNGER_GAMES")
+        heat_map = store.heat_for("Rim team")
+        assert heat_map[(0, 0)] > heat_map.get((2, 2), 0.0) and store.heat_for("Unknown") is not None
+        protocol = Protocol({**config, "strategy": "fleet-mc-hunger-heat"}, regression_journal, 42)
+        protocol.heat = store
+        heat_socket = Socket()
+        await protocol.handle(heat_socket, {"type": "MATCH_STARTED", "rules": hunger_rules,
+            "bonuses": [{"bonus": "SHIELD", "uses": 1}], "opponent": {"kind": "REMOTE_BOT", "teamName": "Rim team"}})
+        assert protocol.strategy_name == "fleet-mc-hunger-heat" and protocol.strategy.heat == heat_map
+        validate_placement(hunger_rules, heat_socket.messages[-1]["ships"])
+        own = sorted(protocol.bonuses.own_ships)
+        await protocol.handle(heat_socket, {"type": "OPPONENT_SHOT", "cell": cell_json(own[0]), "result": "HIT"})
+        kind, _ = protocol.bonuses.choose(shots_left=10, shots_left_in_turn=1, move_number=2)
+        assert kind == "SHOOT"  # one accurate shot is not enough evidence for a shield
+        for cell, result in (((5, 5), "MISS"), ((4, 4), "MISS"), ((3, 3), "MISS")):
+            if cell not in protocol.bonuses.own_ships:
+                await protocol.handle(heat_socket, {"type": "OPPONENT_SHOT", "cell": cell_json(cell), "result": result})
+        kind, _ = protocol.bonuses.choose(shots_left=10, shots_left_in_turn=1, move_number=3)
+        assert kind == "SHOOT"  # accuracy <= 45%
+        free = [cell for cell in sorted(protocol.strategy.board - protocol.bonuses.own_ships)
+                if cell not in protocol.bonuses.opponent_shot_cells]
+        for cell in free[:HeatStore.min_shots]:
+            await protocol.handle(heat_socket, {"type": "OPPONENT_SHOT", "cell": cell_json(cell), "result": "MISS"})
+        await protocol.handle(heat_socket, {"type": "MATCH_FINISHED", "outcome": "WIN", "endReason": "SHOT_LIMIT"})
+        assert store.matches_for("Rim team") == 2
+        fallback = FleetMCHungerHeat(hunger_rules, 5)
+        fallback.place_fleet()
+        assert fallback.placement_note == "no heat map; inland"
+        print("PASS: fleet-mc-hunger-heat uses the team heat map, learns online, gates SHIELD by accuracy")
+        protocol = Protocol({**config, "strategy": "fleet-mc-hunger-v2"}, regression_journal, 42)
+        protocol.heat = store
+        v2_socket = Socket()
+        await protocol.handle(v2_socket, {"type": "MATCH_STARTED", "rules": hunger_rules,
+            "opponent": {"kind": "REMOTE_BOT", "teamName": "Rim team"}})
+        assert isinstance(protocol.strategy, FleetMCHungerV2) and protocol.strategy.heat is not None
+        validate_placement(hunger_rules, v2_socket.messages[-1]["ships"])
+        # Three equally likely length-3 placements through the centre of a row:
+        # inner neighbours have P(hit)=2/3, endpoints only 1/3. Last shot is greedy.
+        row_rules = {**hunger_rules, "rows": 1, "columns": 5, "fleet": [{"length": 3, "count": 1}]}
+        for left in (1, 2):
+            v2 = FleetMCHungerV2(row_rules, 43)
+            v2.shots_left = left
+            v2.observe({"cell": cell_json((0, 2)), "result": "HIT"})
+            cell, reason = v2.choose()
+            assert cell in {(0, 1), (0, 3)} and f"horizon={left}" in reason, (cell, reason)
+        # An expensive shield must not interrupt our own high-probability target.
+        v2 = FleetMCHungerV2(hunger_rules, 7)
+        bag = BonusBag(v2, {"bonuses": [{"bonus": "SHIELD", "uses": 1}]})
+        bag.set_ships([{"cells": [cell_json((0, c)) for c in range(3)]}])
+        for cell, result in (((0, 0), "HIT"), ((0, 1), "HIT"), ((5, 4), "MISS"), ((5, 5), "MISS")):
+            bag.note_opponent_shot({"cell": cell_json(cell), "result": result})
+        assert bag.choose(10, 1, 1)[0] == "USE_BONUS"
+        v2.observe({"cell": cell_json((2, 2)), "result": "HIT"})
+        kind, payload = bag.choose(10, 1, 1)
+        assert kind == "SHOOT" and parse_cell(payload["cell"]) not in v2.used | v2.empty
+        # Insufficient effective samples must preserve the existing legal target.
+        v2.target_min_ess = 10 ** 9
+        cell, reason = v2.choose()
+        assert "target fallback" in reason and cell not in v2.used | v2.empty
+        print("PASS: hunger-v2 stays selected, targets over two shots, is greedy on the last, skips SHIELD during targeting")
         bonus_protocol = Protocol({**config, "strategy": "fleet-mc", "use_bonuses": True}, regression_journal, 9)
         bonus_socket = Socket()
         await bonus_protocol.handle(bonus_socket, {"type": "MATCH_STARTED", "rules": RULES,

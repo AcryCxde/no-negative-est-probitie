@@ -13,7 +13,7 @@ import statistics
 import sys
 from multiprocessing import Pool
 
-from battleship_hack.game import FleetMCHunger, FleetMCSchrodingerRimV2, cell_json, place
+from battleship_hack.game import FleetMCHunger, FleetMCHungerV2, FleetMCSchrodingerRimV2, cell_json, place
 from sim_real_boards import RULES as BASE_RULES, load_boards
 from analyze_placement_logs import components
 
@@ -24,7 +24,8 @@ class Greedy(FleetMCHunger):
         return 1.0
 
 
-VARIANTS = {"rim-v2": FleetMCSchrodingerRimV2, "greedy": Greedy, "hunger": FleetMCHunger}
+VARIANTS = {"rim-v2": FleetMCSchrodingerRimV2, "greedy": Greedy, "hunger": FleetMCHunger,
+            "hunger-v2": FleetMCHungerV2}
 
 
 def play(job):
@@ -55,7 +56,8 @@ def main():
                                     for c in s["cells"]) for i in range(n)]}
     jobs = [(name, src, i, cells, limit) for name in names for src, bs in boards.items() for i, cells in enumerate(bs)]
     results = collections.defaultdict(dict)
-    with Pool(os.cpu_count() or 4) as pool:
+    # Oversubscribing the per-move wall-clock budget changes the MC sample count.
+    with Pool(min(4, os.cpu_count() or 1)) as pool:
         for name, src, i, hits in pool.imap_unordered(play, jobs, chunksize=2):
             results[name, src][i] = hits
     print(f"limit={limit}; boards real={len(boards['real'])} uniform={len(boards['uniform'])}")

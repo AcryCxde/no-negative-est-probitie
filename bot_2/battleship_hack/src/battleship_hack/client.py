@@ -3,6 +3,7 @@ import asyncio
 import json
 import time
 from datetime import datetime
+from pathlib import Path
 from uuid import uuid4
 
 import httpx
@@ -10,7 +11,8 @@ from websockets.asyncio.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 from .bonuses import BonusBag
-from .game import STRATEGIES, cell_json, is_hunger, is_miss_race, is_schrodinger
+from .game import STRATEGIES, cell_json, is_hunger, is_miss_race, is_schrodinger, parse_cell
+from .heat import HeatStore
 from .telemetry import utc_now
 
 LOW_EXPECTATIONS = "Низкие ожидания"
@@ -30,6 +32,9 @@ class Protocol:
         self.last_send = 0.0
         self.own_team_name = None
         self.opponent_team = None
+        self.modifier = None
+        self.opponent_shots = []
+        self.heat = None
         self.last_move_number = None
 
     def interrupted(self, reason: str):
@@ -57,11 +62,17 @@ class Protocol:
         if (is_schrodinger(event["rules"]) and self.strategy_name not in {"baseline", "density"}
                 and not self.strategy_name.startswith("fleet-mc-schrodinger")):
             self.strategy_name = "fleet-mc-schrodinger"
-        if is_hunger(event["rules"]) and self.strategy_name not in {"baseline", "density"}:
+        if (is_hunger(event["rules"]) and self.strategy_name not in {"baseline", "density"}
+                and not self.strategy_name.startswith("fleet-mc-hunger")):
             self.strategy_name = "fleet-mc-hunger"
         self.interrupted("new match started before prior result was received")
         self.journal.battle_id = str(uuid4())
         self.opponent_team = opponent.get("teamName")
+        self.modifier = event["rules"].get("modifier")
+        self.opponent_shots = []
+        if getattr(STRATEGIES[self.strategy_name], "uses_heat", False) and self.heat is None:
+            # Once per process; later matches of this run are added on MATCH_FINISHED.
+            self.heat = HeatStore.from_logs(Path(self.config["data_dir"]) / "logs")
         self.strategy = self.make_strategy(event["rules"], self.seed + len(self.battles))
         self.bonuses = BonusBag(self.strategy, event) if self.config.get("use_bonuses", True) else BonusBag(self.strategy)
         self.active = True
@@ -78,6 +89,8 @@ class Protocol:
     def make_strategy(self, rules: dict, seed: int):
         strategy = STRATEGIES[self.strategy_name](rules, seed)
         strategy.opponent_team = self.opponent_team
+        if getattr(strategy, "uses_heat", False) and self.heat is not None:
+            strategy.heat = self.heat.heat_for(self.opponent_team)
         return strategy
 
     async def send(self, ws, message: dict):
@@ -101,7 +114,9 @@ class Protocol:
         if self.bonuses:
             self.bonuses.set_ships(ships)
         await self.send(ws, {"type": "PLACE", "ships": ships})
-        self.journal.write("local", "PLACEMENT_DECISION", {"elapsed_ms": (time.monotonic()-started)*1000})
+        self.journal.write("local", "PLACEMENT_DECISION", {"elapsed_ms": (time.monotonic()-started)*1000,
+            "note": getattr(self.strategy, "placement_note", None),
+            "heat_matches": self.heat.matches_for(self.opponent_team) if self.heat is not None else None})
 
     async def act(self, ws, event: dict):
         started = time.monotonic()
@@ -175,8 +190,10 @@ class Protocol:
                 self.journal.write("local", "DECISION", {"action": "SHOOT", "cell": cell_json(cell),
                     "reason": f"bonus rejected ({event.get('reason')}); {reason}",
                     "bonus": event.get("bonus")})
-        elif kind == "OPPONENT_SHOT" and self.active and self.bonuses:
-            self.bonuses.note_opponent_shot(event)
+        elif kind == "OPPONENT_SHOT" and self.active:
+            self.opponent_shots.append((parse_cell(event["cell"]), event.get("result")))
+            if self.bonuses:
+                self.bonuses.note_opponent_shot(event)
         elif kind == "OPPONENT_BONUS_USED" and self.active and self.bonuses:
             bonus = event.get("bonus")
             if bonus and self.bonuses.opponent_uses[bonus] > 0:
@@ -185,6 +202,8 @@ class Protocol:
         elif kind == "MATCH_FINISHED" and self.active:
             self.journal.write("local", "BATTLE_FINISHED", event)
             self.battles[-1].update(finished=True, outcome=event["outcome"])
+            if self.heat is not None:
+                self.heat.add(self.opponent_team, self.opponent_shots, self.modifier)
             self.active = False
             self.finished += 1
             print(f"Battle {self.finished}: {event['outcome']} ({event['endReason']}); shots={self.strategy.shots}", flush=True)

@@ -36,6 +36,16 @@ uv run battleship-hack run --mode RANKING --matches 10 --max-seconds 3600 --expe
 
 С основной конфигурацией в RANKING используется `fleet-mc`. По явному выбору можно проверить `hard-quadrants` против командных соперников; эта модель подтверждена на HARD и возвращается к fleet-mc при противоречащих наблюдениях. `hard-edge` отдельно доступна только для TRAINING/HARD. После указанного числа завершённых боёв клиент отключается; общий лимит времени задаёт `--max-seconds`.
 
+Для «Голодных игр» добавлена экспериментальная `fleet-mc-hunger-v2`: расстановка по карте поисковых выстрелов команды из `fleet-mc-hunger-heat`, добивание по согласованным целым флотам с оценкой двух следующих выстрелов (одного, если остался последний), SHIELD только вне нашего добивания и при высокой точности соперника. Базовая `fleet-mc-hunger` доступна для сравнения. Лимит выстрелов приходит от сервера в `MATCH_STARTED.rules.shotLimitPerPlayer`; `--matches` задаёт число партий, а `--experiment` — метку журнала.
+
+```bash
+uv run battleship-hack run --mode RANKING --strategy fleet-mc-hunger-v2 --matches 10 --max-seconds 3600 --experiment hunger-v2-ranking-20
+# Локальное сравнение только стрельбы, 160 досок каждого типа, 20 выстрелов:
+uv run python scripts/sim_hunger.py 160 20 hunger hunger-v2
+```
+
+Разбор исходной стратегии и ограничения офлайн-сравнения: [hunger-ranking-20-review.md](experiments/hunger-ranking-20-review.md).
+
 ```bash
 uv run battleship-hack run --config configs/bot2-ranking.toml --experiment hard-quadrants-ranking-5
 ```

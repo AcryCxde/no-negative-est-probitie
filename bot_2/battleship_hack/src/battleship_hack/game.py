@@ -948,6 +948,164 @@ class FleetMCHunger(FleetMCSchrodingerRimV2):
         return cell, f"hunger density; score={hunt[cell]:.4f}; shots_left={self.left()}; remaining={dict(+self.remaining)}"
 
 
+class FleetMCHungerHeat(FleetMCHunger):
+    """fleet-mc-hunger with placement against the opponent's own hunt-shot map.
+
+    HUNGER_GAMES logs: opponents re-aimed at our rim fleet (Ранил? Прости 100%
+    rim shots, 0/6; Низкие ожидания 49%). The client passes `heat` (expected
+    early hunt shots per cell for this team, heat.HeatStore); placement samples
+    rim/inland/uniform fleets and picks among the least exposed. `explore` keeps
+    a share of uniform fleets so the opponent cannot re-adapt to one pattern.
+    Without a map: inland, rim only against CENTER_HUNTERS. SHIELD only when
+    the opponent is accurate this match (they re-shoot DEFENDED cells at once).
+    """
+    uses_heat = True
+    CENTER_HUNTERS = {"Солидный состав", "Нейро Мугивары", "Who is wasp", "Хранители роутера"}
+    explore = 0.15
+    pool_per_family = 120
+    top_share = 0.05
+    shield_min_accuracy = 0.45
+
+    def __init__(self, rules: dict, seed: int):
+        super().__init__(rules, seed)
+        self.heat: dict[Cell, float] | None = None
+        self.placement_note = ""
+
+    def place_fleet(self) -> list[dict]:
+        if self.heat is None:
+            rim = self.opponent_team in self.CENTER_HUNTERS
+            self.placement_note = f"no heat map; {'rim' if rim else 'inland'}"
+            if rim:
+                try:
+                    return place(self.rules, self.rng, perimeter_multi=True)
+                except (ValueError, TimeoutError):
+                    pass
+            return place(self.rules, self.rng, prefer_interior=True)
+        if self.rng.random() < self.explore:
+            self.placement_note = "explore uniform"
+            return place(self.rules, self.rng)
+        deadline = time.monotonic() + min(0.5, self.rules["placementWindowSeconds"] * 0.05)
+        pool = []
+        families = ({}, {"perimeter_multi": True}, {"prefer_interior": True})
+        for _ in range(self.pool_per_family):
+            for options in families:
+                if time.monotonic() > deadline:
+                    break
+                try:
+                    pool.append(place(self.rules, self.rng, **options))
+                except (ValueError, TimeoutError):
+                    continue
+        if not pool:
+            self.placement_note = "heat pool empty; uniform"
+            return place(self.rules, self.rng)
+        scored = sorted(((self.exposure(ships), n) for n, ships in enumerate(pool)))
+        top = scored[:max(1, int(len(scored) * self.top_share))]
+        exposure, index = self.rng.choice(top)
+        self.placement_note = (f"heat pick exposure={exposure:.2f}; best={scored[0][0]:.2f}; "
+                               f"median={scored[len(scored) // 2][0]:.2f}; pool={len(pool)}")
+        return pool[index]
+
+    def exposure(self, ships: list[dict]) -> float:
+        return sum(self.heat.get(parse_cell(cell), 0.0) for ship in ships for cell in ship["cells"])
+
+
+class FleetMCHungerV2(FleetMCHungerHeat):
+    """Heat placement + fleet-conditioned, two-shot targeting in HUNGER_GAMES.
+
+    Hunt keeps hunger's long-ship value. With open hits, sample complete fleets
+    that cover every hit and exclude already-complete ships (SUNK is announced).
+    Choose for expected hits over two shots, or plain occupancy on the last shot.
+    SHIELD must not consume a shot while we are finishing an enemy ship.
+    """
+    shield_while_targeting = False
+    target_samples = 256
+    target_min_ess = 30
+
+    def choose(self) -> tuple[Cell, str]:
+        if (is_hunger(self.rules) and self.hits
+                and self.rules["touchRule"] == "NO_TOUCHING_EVEN_DIAGONALLY"):
+            result = self.target_choice()
+            if result is not None:
+                return result
+            cell, reason = super().choose()
+            return cell, f"hunger-v2 target fallback; {reason}"
+        return super().choose()
+
+    def target_choice(self) -> tuple[Cell, str] | None:
+        started = time.monotonic()
+        budget = min(0.08, self.rules["moveTimeoutSeconds"] * 0.12)
+        deadline, sample_deadline = started + budget, started + budget * 0.65
+        hits = self.mask(self.hits)
+        candidates = {length: [p for p in options if p[0] & hits != p[0]]
+                      for length, options in self.candidates().items()}
+        # Anchor hits before packing unseen ships so rare hit constraints do not
+        # spend the whole budget on rejection sampling. Fixed cluster order and
+        # labelled ship counts keep the proposal's importance factors explicit.
+        components = [self.mask(c) for c in sorted(self._components(), key=min)]
+        covers = [[(length, p) for length, options in candidates.items()
+                   for p in options if p[0] & component] for component in components]
+        free = {length: [p for p in options if not p[0] & hits]
+                for length, options in candidates.items()}
+        bank, total, square = [], 0, 0
+        for _ in range(4000):
+            if len(bank) >= self.target_samples or time.monotonic() >= sample_deadline:
+                break
+            left = Counter(self.remaining)
+            blocked = occupied = 0
+            ships, weight = [], 1
+            for component, options in zip(components, covers):
+                if occupied & component:
+                    continue  # Disconnected hits can belong to the same ship.
+                available = [(length, p) for length, p in options
+                             if left[length] > 0 and not p[0] & blocked]
+                if not available:
+                    break
+                counts = [left[length] for length, _ in available]
+                weight *= sum(counts)
+                length, (mask, halo, _) = self.rng.choices(available, weights=counts, k=1)[0]
+                left[length] -= 1
+                blocked |= mask | halo
+                occupied |= mask
+                ships.append(mask)
+            else:
+                for length in sorted(left.elements(), reverse=True):
+                    available = [p for p in free[length] if not p[0] & blocked]
+                    if not available:
+                        break
+                    weight *= len(available)
+                    mask, halo, _ = self.rng.choice(available)
+                    blocked |= mask | halo
+                    occupied |= mask
+                    ships.append(mask)
+                else:
+                    bank.append((occupied, tuple(ships), weight))
+                    total += weight
+                    square += weight * weight
+        effective = total * total / square if square else 0
+        if len(bank) < 30 or effective < self.target_min_ess:
+            return None
+        if self.left() <= 1:
+            legal = self.mask(self.board - self.used - self.empty)
+            occupancy = Counter()
+            for occupied, _, weight in bank:
+                bits = occupied & legal
+                while bits:
+                    bit = bits & -bits
+                    occupancy[bit] += weight
+                    bits ^= bit
+            if not occupancy:
+                return None
+            selected = self._select({bit: weight / total for bit, weight in occupancy.items()})
+            index = selected.bit_length() - 1
+            cell, probability = (index // self.columns, index % self.columns), occupancy[selected] / total
+            score, considered = probability, 0
+        else:
+            cell, probability, score, considered = self.lookahead(bank, deadline)
+        return cell, (f"hunger-v2 target; samples={len(bank)}; ess={effective:.1f}; "
+                      f"estimated_hit={probability:.3f}; expected_hits={score:.3f}; "
+                      f"horizon={min(2, self.left())}; candidates={considered}; shots_left={self.left()}")
+
+
 class FleetMCLowExp(FleetMCDuelV2):
     """Counter-profile for «Низкие ожидания» (Donatello/Raphael/Michelangelo).
 
@@ -1191,7 +1349,8 @@ STRATEGIES = {"baseline": Baseline, "density": Density, "fleet-mc": FleetMCExact
               "fleet-mc-bigship": FleetMCBigShip, "fleet-mc-interior": FleetMCInterior,
               "fleet-mc-schrodinger": FleetMCSchrodinger, "fleet-mc-schrodinger-rim": FleetMCSchrodingerRim,
               "fleet-mc-schrodinger-rim-v2": FleetMCSchrodingerRimV2,
-              "fleet-mc-hunger": FleetMCHunger,
+              "fleet-mc-hunger": FleetMCHunger, "fleet-mc-hunger-heat": FleetMCHungerHeat,
+              "fleet-mc-hunger-v2": FleetMCHungerV2,
               "fleet-mc-lowexp": FleetMCLowExp,
               "ranking-auto": FleetMCExact, "ranking-lowexp": FleetMCExact,
               "hard-edge": HardEdge, "hard-quadrants": HardQuadrants}
