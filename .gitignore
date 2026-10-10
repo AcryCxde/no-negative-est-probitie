@@ -1,0 +1,27 @@
+# Секреты: токены ботов выдаются в «Кабинете команды», в git им не место
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+*.key
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Логи партий и прочий мусор
+*.log
