@@ -281,10 +281,14 @@ class FleetMC(Density):
         if samples < 30 or not occupancy:
             cell, reason = self.density_choice(candidates)
             return cell, f"MC fallback samples={samples}; {reason}"
+        cell = self.select_hunt(occupancy)
+        return cell, (f"hunt fleet-mc; samples={samples}; estimated_hit={occupancy[cell]/samples:.3f}; "
+                      f"remaining={dict(+self.remaining)}")
+
+    def select_hunt(self, occupancy: Counter) -> Cell:
         best = max(occupancy.values())
-        tied = sorted(c for c, score in occupancy.items() if score == best)
-        cell = self.rng.choice(tied)
-        return cell, f"hunt fleet-mc; samples={samples}; estimated_hit={best/samples:.3f}; remaining={dict(+self.remaining)}"
+        tied = sorted(cell for cell, score in occupancy.items() if score == best)
+        return self.rng.choice(tied)
 
 
 class FleetMCExact(FleetMC):
@@ -861,6 +865,10 @@ def is_hunger(rules: dict) -> bool:
     return rules.get("modifier") == "HUNGER_GAMES"
 
 
+def is_speedrun(rules: dict) -> bool:
+    return rules.get("modifier") == "SPEEDRUN"
+
+
 class FleetMCHunger(FleetMCSchrodingerRimV2):
     """HUNGER_GAMES: maximize hits within shotLimitPerPlayer, not shots to sink.
 
@@ -1106,6 +1114,41 @@ class FleetMCHungerV2(FleetMCHungerHeat):
                       f"horizon={min(2, self.left())}; candidates={considered}; shots_left={self.left()}")
 
 
+class FleetMCHungerV3(FleetMCHungerV2):
+    """hunger-v2 with hunt scores calibrated per opponent and board zone.
+
+    HUNGER_GAMES logs, 3916 hunt shots: MC predicted 0.306/0.276/0.254 on
+    rim/ring 1/inner, observed 0.321/0.250/0.168, so opponents keep ships out of
+    the centre that MC favours. zone_factors (observed/predicted hits per zone,
+    heat.CalibrationStore, shrunk to the pooled ratio) scale hunt scores and
+    single-ship weights. Targeting, placement and SHIELD are hunger-v2's.
+    """
+    uses_calibration = True
+
+    def __init__(self, rules: dict, seed: int):
+        super().__init__(rules, seed)
+        self.zone_factors: tuple[float, ...] | None = None
+
+    def zone_factor(self, cell: Cell) -> float:
+        if not self.zone_factors:
+            return 1.0
+        return self.zone_factors[min(self.interior_depth(cell), len(self.zone_factors) - 1)]
+
+    def _pick_hunt(self, scored: dict[Cell, float]) -> Cell:
+        return super()._pick_hunt({cell: score * self.zone_factor(cell) for cell, score in scored.items()})
+
+    def placement_weight(self, mask: int):
+        if mask & (mask - 1):
+            return 1
+        return self.zone_factor(divmod(mask.bit_length() - 1, self.columns))
+
+    def choose(self) -> tuple[Cell, str]:
+        cell, reason = super().choose()
+        if self.zone_factors and not self.hits:
+            reason = f"{reason}; zone_factor={self.zone_factor(cell):.2f}"
+        return cell, reason
+
+
 class FleetMCLowExp(FleetMCDuelV2):
     """Counter-profile for «Низкие ожидания» (Donatello/Raphael/Michelangelo).
 
@@ -1344,14 +1387,157 @@ class HardQuadrants(HardEdge):
         return occupancy, layouts
 
 
+class FleetMCSpeedrun(HardQuadrants):
+    """SPEEDRUN: both seats shoot one HARD board; fewer shots to sink wins.
+
+    The platform builds that board the same way as the built-in HARD bot:
+    multi-cell ships lie on the perimeter, one interior single in each quadrant.
+    HardEdge turns this model off for every modifier, so a plain hard-quadrants
+    run would fall back to an uninformed hunt. Hunt ties inside a 3% band take
+    even parity, which still hits every ship of length >= 2. A conflicting
+    observation falls back. Placement is unused: PLACE is rejected in this mode.
+    """
+    tolerance = 0.03
+
+    def __init__(self, rules: dict, seed: int):
+        super().__init__(rules, seed)
+        if (self.model_disabled == "unsupported rules/modifier" and is_speedrun(rules)
+                and rules.get("touchRule") == "NO_TOUCHING_EVEN_DIAGONALLY"):
+            self.model_disabled = None
+
+    def select_hunt(self, occupancy: Counter) -> Cell:
+        best = max(occupancy.values())
+        near = [cell for cell, score in occupancy.items() if score >= best * (1 - self.tolerance)]
+        even = [cell for cell in near if (cell[0] + cell[1]) % 2 == 0]
+        pool = even or near
+        top = max(occupancy[cell] for cell in pool)
+        return self.rng.choice(sorted(cell for cell in pool if occupancy[cell] == top))
+
+    def choose(self) -> tuple[Cell, str]:
+        cell, reason = super().choose()
+        return cell, reason.replace("hard-quadrants", "speedrun", 1).replace("hard-edge", "speedrun", 1)
+
+
+class FleetMCSpeedrunV2(FleetMCSpeedrun):
+    """speedrun hunt plus hunger-v2 targeting, scored by shots to sink.
+
+    Hunt stays the HARD probability map. All 20 ship cells must be hit, so a
+    long ship is not worth more than a short one and hunger's ship_value would
+    spend misses chasing it. With open hits, density can shoot off the end of
+    the ship. Sample fleets that cover every hit and stay on the perimeter,
+    then take the two-shot expectation: a sink's halo is the follow-up, the
+    same sampler hunger-v2 used when a miss was expensive. Too few samples
+    fall back to speedrun density. Placement and bonuses stay unused.
+    """
+    target_samples = 256
+    target_min_ess = 30
+
+    def choose(self) -> tuple[Cell, str]:
+        if (self.model_disabled is None and self.hits
+                and self.rules["touchRule"] == "NO_TOUCHING_EVEN_DIAGONALLY"):
+            targeted = self.target_choice()
+            if targeted is not None:
+                return targeted
+            cell, reason = super().choose()
+            return cell, f"speedrun-v2 target fallback; {reason}"
+        cell, reason = super().choose()
+        if reason.startswith("speedrun"):
+            return cell, reason.replace("speedrun", "speedrun-v2", 1)
+        return cell, f"speedrun-v2; {reason}"
+
+    def model_candidates(self) -> dict | None:
+        candidates = {length: [p for p in options
+            if (all(not self.is_edge(cell) for cell in p[2]) if length == 1
+                else all(self.is_edge(cell) for cell in p[2]))]
+            for length, options in self.candidates().items()}
+        hits = self.mask(self.hits)
+        covered = 0
+        for options in candidates.values():
+            for mask, _, _ in options:
+                covered |= mask & hits
+        if (not candidates or any(not options for options in candidates.values()) or hits & ~covered):
+            return None
+        return candidates
+
+    def target_choice(self) -> tuple[Cell, str] | None:
+        started = time.monotonic()
+        budget = min(0.08, self.rules["moveTimeoutSeconds"] * 0.12)
+        deadline, sample_deadline = started + budget, started + budget * 0.65
+        candidates = self.model_candidates()
+        if candidates is None:
+            return None
+        hits = self.mask(self.hits)
+        pool = {length: [p for p in options if p[0] & hits != p[0]]
+                for length, options in candidates.items()}
+        components = [self.mask(c) for c in sorted(self._hit_components(), key=min)]
+        covers = [[(length, p) for length, options in pool.items() for p in options if p[0] & component]
+                  for component in components]
+        free = {length: [p for p in options if not p[0] & hits] for length, options in pool.items()}
+        bank, total, square = [], 0.0, 0.0
+        for _ in range(4000):
+            if len(bank) >= self.target_samples or time.monotonic() >= sample_deadline:
+                break
+            left = Counter(self.remaining)
+            blocked = occupied = 0
+            ships, weight = [], 1.0
+            for component, options in zip(components, covers):
+                if occupied & component:
+                    continue
+                available = [(length, p) for length, p in options if left[length] > 0 and not p[0] & blocked]
+                if not available:
+                    break
+                counts = [left[length] for length, _ in available]
+                weight *= sum(counts)
+                length, (mask, halo, _) = self.rng.choices(available, weights=counts, k=1)[0]
+                left[length] -= 1
+                blocked |= mask | halo
+                occupied |= mask
+                ships.append(mask)
+            else:
+                for length in sorted(left.elements(), reverse=True):
+                    available = [p for p in free[length] if not p[0] & blocked]
+                    if not available:
+                        break
+                    weight *= len(available)
+                    mask, halo, _ = self.rng.choice(available)
+                    blocked |= mask | halo
+                    occupied |= mask
+                    ships.append(mask)
+                else:
+                    if occupied & hits == hits:
+                        bank.append((occupied, tuple(ships), weight))
+                        total += weight
+                        square += weight * weight
+        effective = total * total / square if square else 0
+        if len(bank) < 30 or effective < self.target_min_ess:
+            return None
+        cell, probability, score, considered = FleetMCDuel.lookahead(self, bank, deadline)
+        return cell, (f"speedrun-v2 target; samples={len(bank)}; ess={effective:.1f}; "
+                      f"estimated_hit={probability:.3f}; expected_hits={score:.3f}; candidates={considered}")
+
+    def _hit_components(self) -> list[set[Cell]]:
+        components, unseen = [], set(self.hits)
+        while unseen:
+            component = {unseen.pop()}
+            frontier = list(component)
+            while frontier:
+                adjacent = neighbors(frontier.pop()) & unseen
+                unseen -= adjacent
+                component |= adjacent
+                frontier.extend(adjacent)
+            components.append(component)
+        return components
+
+
 STRATEGIES = {"baseline": Baseline, "density": Density, "fleet-mc": FleetMCExact, "fleet-mc-v1": FleetMC,
               "fleet-mc-duel": FleetMCDuel, "fleet-mc-duel-v2": FleetMCDuelV2,
               "fleet-mc-bigship": FleetMCBigShip, "fleet-mc-interior": FleetMCInterior,
               "fleet-mc-schrodinger": FleetMCSchrodinger, "fleet-mc-schrodinger-rim": FleetMCSchrodingerRim,
               "fleet-mc-schrodinger-rim-v2": FleetMCSchrodingerRimV2,
               "fleet-mc-hunger": FleetMCHunger, "fleet-mc-hunger-heat": FleetMCHungerHeat,
-              "fleet-mc-hunger-v2": FleetMCHungerV2,
+              "fleet-mc-hunger-v2": FleetMCHungerV2, "fleet-mc-hunger-v3": FleetMCHungerV3,
               "fleet-mc-lowexp": FleetMCLowExp,
               "ranking-auto": FleetMCExact, "ranking-lowexp": FleetMCExact,
-              "hard-edge": HardEdge, "hard-quadrants": HardQuadrants}
+              "hard-edge": HardEdge, "hard-quadrants": HardQuadrants,
+              "fleet-mc-speedrun": FleetMCSpeedrun, "fleet-mc-speedrun-v2": FleetMCSpeedrunV2}
 

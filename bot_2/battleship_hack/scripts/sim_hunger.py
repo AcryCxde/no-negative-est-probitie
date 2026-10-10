@@ -7,13 +7,15 @@ Usage: uv run python scripts/sim_hunger.py [boards] [limit] [variant ...]
 from __future__ import annotations
 
 import collections
+import math
 import os
 import random
 import statistics
 import sys
 from multiprocessing import Pool
 
-from battleship_hack.game import FleetMCHunger, FleetMCHungerV2, FleetMCSchrodingerRimV2, cell_json, place
+from battleship_hack.game import (FleetMCHunger, FleetMCHungerV2, FleetMCHungerV3, FleetMCSchrodingerRimV2,
+                                  cell_json, place)
 from sim_real_boards import RULES as BASE_RULES, load_boards
 from analyze_placement_logs import components
 
@@ -24,8 +26,15 @@ class Greedy(FleetMCHunger):
         return 1.0
 
 
+class V3Pooled(FleetMCHungerV3):
+    """hunger-v3 with the pooled live zone factors (rim, ring 1, inner) as of 2026-10-10."""
+    def __init__(self, rules: dict, seed: int):
+        super().__init__(rules, seed)
+        self.zone_factors = (1.07, 0.88, 0.65)
+
+
 VARIANTS = {"rim-v2": FleetMCSchrodingerRimV2, "greedy": Greedy, "hunger": FleetMCHunger,
-            "hunger-v2": FleetMCHungerV2}
+            "hunger-v2": FleetMCHungerV2, "hunger-v3": V3Pooled}
 
 
 def play(job):
@@ -46,6 +55,17 @@ def play(job):
     return name, source, index, hits
 
 
+def calibrated_boards(n: int, pool: int = 4000, power: float = 2.0) -> list[frozenset]:
+    """Uniform fleets resampled by prod(zone factor) so zone occupancy follows the live ratios."""
+    rng = random.Random(83000)
+    fleets = [frozenset((c["row"], c["column"]) for s in place(BASE_RULES, random.Random(84000 + i))
+                        for c in s["cells"]) for i in range(pool)]
+    factors = V3Pooled(BASE_RULES, 0).zone_factors
+    weights = [math.prod(factors[min(r, 9 - r, c, 9 - c, 2)] for r, c in fleet) ** power
+               for fleet in fleets]
+    return rng.choices(fleets, weights, k=n)
+
+
 def main():
     numbers = [int(a) for a in sys.argv[1:] if a.isdigit()]
     n, limit = (numbers + [120, 20])[:2] if numbers else (120, 20)
@@ -53,7 +73,12 @@ def main():
     real = [cells for _, cells in load_boards()]
     boards = {"real": real[::max(1, len(real) // n)][:n],
               "uniform": [frozenset((c["row"], c["column"]) for s in place(BASE_RULES, random.Random(81000 + i))
-                                    for c in s["cells"]) for i in range(n)]}
+                                    for c in s["cells"]) for i in range(n)],
+              # Synthetic upper bound for rim-heavy opponents: every multi-cell ship on the rim.
+              "rim-multi": [frozenset((c["row"], c["column"])
+                                      for s in place(BASE_RULES, random.Random(82000 + i), perimeter_multi=True)
+                                      for c in s["cells"]) for i in range(n)],
+              "calibrated": calibrated_boards(n)}
     jobs = [(name, src, i, cells, limit) for name in names for src, bs in boards.items() for i, cells in enumerate(bs)]
     results = collections.defaultdict(dict)
     # Oversubscribing the per-move wall-clock budget changes the MC sample count.

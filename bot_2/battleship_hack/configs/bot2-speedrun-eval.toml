@@ -1,0 +1,11 @@
+# Separate telemetry DB for speedrun comparisons while another process reads analytics.
+url = "wss://hackathon.no-offence.ru/api/v1/bots/connection"
+api_url = "https://hackathon.no-offence.ru"
+mode = "RANKING"
+opponent = "HARD"
+strategy = "fleet-mc-speedrun-v2"
+matches = 5
+max_seconds = 300
+reconnect_attempts = 3
+use_bonuses = false
+data_dir = "data/bot2/speedrun-eval"

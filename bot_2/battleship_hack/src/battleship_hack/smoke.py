@@ -11,8 +11,8 @@ from websockets.asyncio.server import serve
 
 from .bonuses import BonusBag
 from .client import Protocol, run, same_opponent
-from .game import Baseline, Density, FleetMC, FleetMCExact, FleetMCDuel, FleetMCDuelV2, FleetMCInterior, FleetMCSchrodinger, FleetMCSchrodingerRim, FleetMCSchrodingerRimV2, FleetMCHunger, FleetMCHungerHeat, FleetMCHungerV2, HardEdge, HardQuadrants, STRATEGIES, cell_json, is_duel, is_miss_race, is_musketeers, neighbors, place, parse_cell, validate_placement
-from .heat import HeatStore
+from .game import Baseline, Density, FleetMC, FleetMCExact, FleetMCDuel, FleetMCDuelV2, FleetMCInterior, FleetMCSchrodinger, FleetMCSchrodingerRim, FleetMCSchrodingerRimV2, FleetMCHunger, FleetMCHungerHeat, FleetMCHungerV2, FleetMCHungerV3, FleetMCSpeedrun, FleetMCSpeedrunV2, HardEdge, HardQuadrants, STRATEGIES, cell_json, is_duel, is_miss_race, is_musketeers, neighbors, place, parse_cell, validate_placement
+from .heat import CalibrationStore, HeatStore, hunt_prediction
 from .telemetry import Journal, ingest, report
 
 RULES = {"rows": 6, "columns": 6, "fleet": [{"length": 3, "count": 1}, {"length": 2, "count": 1}, {"length": 1, "count": 1}],
@@ -264,8 +264,10 @@ async def smoke():
                 await protocol.handle(socket, {"type": "MATCH_SNAPSHOT", "rules": rules,
                     "ships": [] if source == "placed" else None, "shots": [], "shotsLeft": 36,
                     "placementWindowLeftSeconds": None if source == "placed" else 0})
-            expected_name = "hard-quadrants" if source == "ranking" else "fleet-mc"
+            expected_name = {"ranking": "hard-quadrants", "speedrun": "fleet-mc-speedrun-v2"}.get(source, "fleet-mc")
             assert isinstance(protocol.strategy, FleetMC) and protocol.strategy_name == expected_name
+            if source == "speedrun":
+                assert isinstance(protocol.strategy, FleetMCSpeedrunV2) and protocol.strategy.model_disabled is None
             if source in {"ranking", "training-race", "snapshot"}:
                 assert socket.messages[0]["type"] == "PLACE"
                 validate_placement(rules, socket.messages[0]["ships"])
@@ -406,6 +408,84 @@ async def smoke():
         cell, reason = v2.choose()
         assert "target fallback" in reason and cell not in v2.used | v2.empty
         print("PASS: hunger-v2 stays selected, targets over two shots, is greedy on the last, skips SHIELD during targeting")
+        assert hunt_prediction("hunger hunt; samples=40; estimated_hit=0.250; value=0.4") == 0.25
+        assert hunt_prediction("hunger-v2 target; estimated_hit=0.600") is None
+        calibration = CalibrationStore()
+        calibration.add("Rim team", [((0, c), 0.5, True) for c in range(6)] * 4
+                        + [((1, c), 0.5, c % 2 == 0) for c in range(1, 5)] * 6
+                        + [((2, c), 0.5, False) for c in (2, 3)] * 12, 6, 6)
+        factors = calibration.factors("Rim team")
+        assert factors[0] > 1.5 and factors[2] < 0.6 and calibration.factors("Unknown") == factors, factors
+        protocol = Protocol({**config, "strategy": "fleet-mc-hunger-v3"}, regression_journal, 42)
+        protocol.heat, protocol.calibration = store, calibration
+        v3_socket = Socket()
+        await protocol.handle(v3_socket, {"type": "MATCH_STARTED", "rules": hunger_rules,
+            "opponent": {"kind": "REMOTE_BOT", "teamName": "Rim team"}})
+        assert protocol.strategy_name == "fleet-mc-hunger-v3" and protocol.strategy.zone_factors == factors
+        await protocol.handle(v3_socket, {"type": "TURN_REQUESTED", "moveNumber": 1, "shotsLeft": 20, "shotsLeftInTurn": 1})
+        shot = parse_cell(v3_socket.messages[-1]["cell"])
+        assert min(shot[0], 5 - shot[0], shot[1], 5 - shot[1]) == 0, shot  # rim factor wins the hunt
+        await protocol.handle(v3_socket, {"type": "SHOT_RESOLVED", "cell": cell_json(shot), "result": "MISS"})
+        assert protocol.hunt_records and protocol.hunt_records[0][0] == shot
+        before = calibration.sums["Rim team"][0][0]
+        await protocol.handle(v3_socket, {"type": "MATCH_FINISHED", "outcome": "LOSS", "endReason": "SHOT_LIMIT"})
+        assert calibration.sums["Rim team"][0][0] != before
+        plain = FleetMCHungerV3(hunger_rules, 5)
+        assert plain.zone_factor((2, 2)) == 1.0 and plain.placement_weight(0b11) == 1
+        print("PASS: hunger-v3 calibrates hunt by team zone factors, records hunt outcomes online")
+        speed_rules = {**RULES, "rows": 10, "columns": 10, "modifier": "SPEEDRUN",
+                       "fleet": [{"length": 4, "count": 1}, {"length": 3, "count": 2},
+                                 {"length": 2, "count": 3}, {"length": 1, "count": 4}]}
+        speed = FleetMCSpeedrun(speed_rules, 11)
+        assert speed.model_disabled is None and speed.quadrants_disabled is None
+        started = time.monotonic()
+        cell, reason = speed.choose()
+        assert time.monotonic() - started < 0.5 and speed.is_edge(cell) and reason.startswith("speedrun "), (cell, reason)
+        aimed = FleetMCSpeedrunV2(speed_rules, 11)
+        aimed.observe({"cell": cell_json((0, 0)), "result": "HIT"})
+        started = time.monotonic()
+        cell, reason = aimed.choose()
+        assert time.monotonic() - started < 0.5 and cell in {(0, 1), (1, 0)} and reason.startswith("speedrun-v2 target"), (cell, reason)
+        aimed.target_min_ess = 10 ** 9
+        cell, reason = aimed.choose()
+        assert "target fallback" in reason and cell not in aimed.used | aimed.empty
+        blocked = HardEdge(speed_rules, 11)
+        assert blocked.model_disabled == "unsupported rules/modifier"
+        protocol = Protocol({**config, "strategy": "fleet-mc-hunger-v2"}, regression_journal, 42)
+        speed_socket = Socket()
+        await protocol.handle(speed_socket, {"type": "MATCH_STARTED", "rules": speed_rules,
+            "bonuses": [{"bonus": "SONAR", "uses": 1}, {"bonus": "SHIELD", "uses": 1}, {"bonus": "SALVO", "uses": 1}],
+            "opponent": {"kind": "REMOTE_BOT", "teamName": "Team"}})
+        assert protocol.strategy_name == "fleet-mc-speedrun-v2" and isinstance(protocol.strategy, FleetMCSpeedrunV2)
+        assert not speed_socket.messages
+        kept = Protocol({**config, "strategy": "fleet-mc-speedrun"}, regression_journal, 42)
+        await kept.handle(Socket(), {"type": "MATCH_STARTED", "rules": speed_rules,
+            "opponent": {"kind": "REMOTE_BOT", "teamName": "Team"}})
+        assert kept.strategy_name == "fleet-mc-speedrun" and isinstance(kept.strategy, FleetMCSpeedrun)
+        await protocol.handle(speed_socket, {"type": "TURN_REQUESTED", "moveNumber": 1,
+            "shotsLeft": 100, "shotsLeftInTurn": 1})
+        assert speed_socket.messages[-1]["type"] == "SHOOT"
+        print("PASS: SPEEDRUN v2 keeps the HARD prior, targets the rim ship, skips PLACE and bonuses")
+        pending = speed_socket.messages[-1]["cell"]
+        sent = len(speed_socket.messages)
+        await protocol.handle(speed_socket, {"type": "TURN_TIMED_OUT", "moveNumber": 2})
+        await protocol.handle(speed_socket, {"type": "TURN_REQUESTED", "moveNumber": 3,
+            "shotsLeft": 99, "shotsLeftInTurn": 1})
+        assert len(speed_socket.messages) == sent and protocol.pending_speedrun_shot == parse_cell(pending)
+        await protocol.handle(speed_socket, {"type": "SHOT_RESOLVED", "cell": pending, "result": "MISS"})
+        assert protocol.pending_speedrun_shot is None
+        await protocol.handle(speed_socket, {"type": "TURN_REQUESTED", "moveNumber": 4,
+            "shotsLeft": 98, "shotsLeftInTurn": 1})
+        assert len(speed_socket.messages) == sent + 1 and speed_socket.messages[-1]["cell"] != pending
+        await protocol.handle(speed_socket, {"type": "SHOT_REJECTED", "reason": "NOT_YOUR_TURN"})
+        assert protocol.pending_speedrun_shot is None
+        await protocol.handle(speed_socket, {"type": "TURN_REQUESTED", "moveNumber": 5,
+            "shotsLeft": 98, "shotsLeftInTurn": 1})
+        assert len(speed_socket.messages) == sent + 2
+        await protocol.handle(speed_socket, {"type": "MATCH_FINISHED", "outcome": "LOSS",
+            "endReason": "SPEEDRUN_FINISHED"})
+        assert protocol.pending_speedrun_shot is None
+        print("PASS: delayed SPEEDRUN shot result cannot trigger a duplicate after timeout; rejection/end release it")
         bonus_protocol = Protocol({**config, "strategy": "fleet-mc", "use_bonuses": True}, regression_journal, 9)
         bonus_socket = Socket()
         await bonus_protocol.handle(bonus_socket, {"type": "MATCH_STARTED", "rules": RULES,

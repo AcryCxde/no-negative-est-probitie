@@ -11,8 +11,8 @@ from websockets.asyncio.client import connect
 from websockets.exceptions import ConnectionClosed, InvalidStatus
 
 from .bonuses import BonusBag
-from .game import STRATEGIES, cell_json, is_hunger, is_miss_race, is_schrodinger, parse_cell
-from .heat import HeatStore
+from .game import STRATEGIES, cell_json, is_hunger, is_miss_race, is_schrodinger, is_speedrun, parse_cell
+from .heat import CalibrationStore, HeatStore, hunt_prediction
 from .telemetry import utc_now
 
 LOW_EXPECTATIONS = "Низкие ожидания"
@@ -35,7 +35,10 @@ class Protocol:
         self.modifier = None
         self.opponent_shots = []
         self.heat = None
+        self.calibration = None
+        self.hunt_records, self.pending_prediction = [], None
         self.last_move_number = None
+        self.pending_speedrun_shot = None
 
     def interrupted(self, reason: str):
         if self.active:
@@ -65,19 +68,27 @@ class Protocol:
         if (is_hunger(event["rules"]) and self.strategy_name not in {"baseline", "density"}
                 and not self.strategy_name.startswith("fleet-mc-hunger")):
             self.strategy_name = "fleet-mc-hunger"
+        # HARD placement prior. baseline/density stay explicit controls.
+        if (is_speedrun(event["rules"]) and self.strategy_name not in {"baseline", "density"}
+                and not self.strategy_name.startswith("fleet-mc-speedrun")):
+            self.strategy_name = "fleet-mc-speedrun-v2"
         self.interrupted("new match started before prior result was received")
         self.journal.battle_id = str(uuid4())
         self.opponent_team = opponent.get("teamName")
         self.modifier = event["rules"].get("modifier")
         self.opponent_shots = []
+        self.hunt_records, self.pending_prediction = [], None
+        # Once per process; later matches of this run are added on MATCH_FINISHED.
         if getattr(STRATEGIES[self.strategy_name], "uses_heat", False) and self.heat is None:
-            # Once per process; later matches of this run are added on MATCH_FINISHED.
             self.heat = HeatStore.from_logs(Path(self.config["data_dir"]) / "logs")
+        if getattr(STRATEGIES[self.strategy_name], "uses_calibration", False) and self.calibration is None:
+            self.calibration = CalibrationStore.from_logs(Path(self.config["data_dir"]) / "logs")
         self.strategy = self.make_strategy(event["rules"], self.seed + len(self.battles))
         self.bonuses = BonusBag(self.strategy, event) if self.config.get("use_bonuses", True) else BonusBag(self.strategy)
         self.active = True
         self.placement_attempts = 0
         self.last_move_number = None
+        self.pending_speedrun_shot = None
         info = {"battle_id": self.journal.battle_id, "started_at": utc_now(), "opponent": opponent, "finished": False}
         self.battles.append(info)
         bonus_uses = dict(self.bonuses.uses)
@@ -91,6 +102,8 @@ class Protocol:
         strategy.opponent_team = self.opponent_team
         if getattr(strategy, "uses_heat", False) and self.heat is not None:
             strategy.heat = self.heat.heat_for(self.opponent_team)
+        if getattr(strategy, "uses_calibration", False) and self.calibration is not None:
+            strategy.zone_factors = self.calibration.factors(self.opponent_team)
         return strategy
 
     async def send(self, ws, message: dict):
@@ -122,6 +135,15 @@ class Protocol:
         started = time.monotonic()
         if event["shotsLeft"] <= 0:
             return
+        # A delayed SHOOT may be accepted after the server's timeout. Sending
+        # another one before its result arrives creates duplicate counted MISSes
+        # and a queue of actions based on stale state. Keep one shot in flight.
+        if is_speedrun(self.strategy.rules) and self.pending_speedrun_shot is not None:
+            self.journal.write("local", "ACTION_DEFERRED", {
+                "reason": "speedrun: awaiting the previous shot result",
+                "cell": cell_json(self.pending_speedrun_shot),
+                "moveNumber": event["moveNumber"], "shotsLeft": event["shotsLeft"]})
+            return
         move_number = event["moveNumber"]
         if self.bonuses and self.last_move_number is not None and move_number != self.last_move_number:
             self.bonuses.note_turn_passed()
@@ -134,7 +156,11 @@ class Protocol:
             kind, payload = "SHOOT", {"cell": cell_json(cell), "reason": reason}
         reason = payload.pop("reason", "")
         message = {"type": kind, **{key: value for key, value in payload.items() if key != "reason"}}
+        predicted = hunt_prediction(reason) if kind == "SHOOT" else None
+        self.pending_prediction = (parse_cell(payload["cell"]), predicted) if predicted is not None else None
         await self.send(ws, message)
+        if kind == "SHOOT" and is_speedrun(self.strategy.rules):
+            self.pending_speedrun_shot = parse_cell(payload["cell"])
         self.journal.write("local", "DECISION", {**payload, "action": kind, "reason": reason,
             "elapsed_ms": (time.monotonic()-started)*1000, "moveNumber": move_number,
             "shotsLeft": event["shotsLeft"], "shotsLeftInTurn": event["shotsLeftInTurn"],
@@ -159,6 +185,7 @@ class Protocol:
                 self.start({"rules": event["rules"], "opponent": {}, "bonuses": event.get("bonuses") or []})
                 self.journal.write("local", "MATCH_RESUMED", {"opponent_unknown": True})
             self.strategy = self.make_strategy(event["rules"], self.seed + len(self.battles)-1)
+            self.pending_speedrun_shot = None
             self.bonuses = BonusBag(self.strategy, event) if self.config.get("use_bonuses", True) else BonusBag(self.strategy)
             for shot in event["shots"]:
                 self.strategy.observe(shot)
@@ -173,6 +200,11 @@ class Protocol:
                 raise RuntimeError("Turn without active match")
             await self.act(ws, event)
         elif kind == "SHOT_RESOLVED" and self.active:
+            if self.pending_speedrun_shot == parse_cell(event["cell"]):
+                self.pending_speedrun_shot = None
+            if self.pending_prediction and self.pending_prediction[0] == parse_cell(event["cell"]):
+                self.hunt_records.append((*self.pending_prediction, event["result"] in ("HIT", "SUNK")))
+                self.pending_prediction = None
             self.strategy.observe(event)
         elif kind == "BONUS_RESOLVED" and self.active and self.bonuses:
             self.bonuses.apply_resolved(event)
@@ -204,12 +236,17 @@ class Protocol:
             self.battles[-1].update(finished=True, outcome=event["outcome"])
             if self.heat is not None:
                 self.heat.add(self.opponent_team, self.opponent_shots, self.modifier)
+            if self.calibration is not None and self.modifier == "HUNGER_GAMES":
+                rules = self.strategy.rules
+                self.calibration.add(self.opponent_team, self.hunt_records, rules["rows"], rules["columns"])
             self.active = False
+            self.pending_speedrun_shot = None
             self.finished += 1
             print(f"Battle {self.finished}: {event['outcome']} ({event['endReason']}); shots={self.strategy.shots}", flush=True)
             self.journal.battle_id = None
         elif kind in {"SHOT_REJECTED", "COMMAND_REJECTED"}:
             # Avoid retry floods; the next valid TURN_REQUESTED drives the next action.
+            self.pending_speedrun_shot = None
             print(f"Rejected: {kind} {event.get('reason')}", flush=True)
         elif kind == "BET_REQUESTED":
             self.journal.write("local", "BET_SKIPPED", {"reason": "baseline does not spend rating on bets"})

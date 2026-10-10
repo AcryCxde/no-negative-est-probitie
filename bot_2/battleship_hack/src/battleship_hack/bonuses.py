@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from collections import Counter
 
-from .game import Cell, cell_json, is_hunger, is_musketeers, neighbors, parse_cell
+from .game import Cell, cell_json, is_hunger, is_musketeers, is_speedrun, neighbors, parse_cell
 
 
 class BonusBag:
@@ -81,6 +81,11 @@ class BonusBag:
         self.forced = None
         if not self.enabled or self.reject_streak >= 2 or shots_left <= 0:
             return self._shoot("bonus skipped")
+        # SPEEDRUN scores shots to sink. DISTANCE/SONAR/SHIELD/MINE spend one,
+        # SHIELD and MINE protect a fleet we do not have, SALVO does not reduce
+        # the number of shots that still have to be fired.
+        if is_speedrun(self.strategy.rules):
+            return self._shoot("speedrun: a bonus spends a counted shot")
         if is_hunger(self.strategy.rules):
             return self._hunger_choice(shots_left)
         remaining = getattr(self.strategy, "remaining", None)
