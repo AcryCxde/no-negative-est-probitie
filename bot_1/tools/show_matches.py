@@ -1,6 +1,6 @@
 """Разбор журналов партий бота: расстановки, куда стрелял соперник, статистика по видам расстановки.
 
-Запуск: uv run python tools/show_matches.py bot_1/matches [сколько последних партий показать]
+Запуск: PYTHONPATH=. uv run python bot_1/tools/show_matches.py bot_1/matches [сколько показать]
 """
 
 import json
@@ -10,7 +10,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from bot_1.hard_fleets import FLEETS
+
 SIZE = 10
+TUNED = {frozenset((c.row, c.column) for ship in fleet for c in ship.cells) for fleet in FLEETS}
 
 
 @dataclass(frozen=True)
@@ -25,6 +28,8 @@ class Match:
 
     @property
     def kind(self) -> str:
+        if frozenset(self.fleet) in TUNED:
+            return "tuned"
         rows = {r for r, _ in self.fleet}
         columns = {c for _, c in self.fleet}
         half = SIZE // 2

@@ -1,14 +1,14 @@
 from random import Random
 
 import pytest
-
 from seabattle.model import Cell, Fleet, ShotResult
 from seabattle.placement import validate_fleet
-from strategies.density import DensityStrategy
-from strategies.hard_fleets import FLEETS, decode
 from tests.fake_platform import rules_of
 from tools.bench_strategy import play_out
-from tools.hard_model import HardModel
+
+from bot_1.hard_fleets import FLEETS, decode
+from bot_1.strategy import Bot1Strategy
+from bot_1.tools.hard_model import HardModel
 
 # Первая партия из журналов bot_1: расстановка и начало стрельбы настоящего HARD
 RECORDED = decode("0,8,4v 9,5,3h 1,1,3v 5,3,2v 4,5,2h 9,1,2h 3,3,1h 8,9,1h 6,0,1h 1,4,1h")
@@ -53,7 +53,7 @@ def test_hard_needs_far_more_shots_than_on_a_random_fleet(fleet: Fleet) -> None:
 
 
 def test_strategy_places_from_the_set() -> None:
-    placed = {DensityStrategy().place(rules_of(), Random(seed)) for seed in range(100)}
+    placed = {Bot1Strategy().place(rules_of(), Random(seed)) for seed in range(100)}
     assert placed <= set(FLEETS)
     assert len(placed) > 1
 
@@ -62,5 +62,5 @@ def test_other_board_gets_a_valid_random_fleet() -> None:
     ships = [{"length": 3, "count": 2}, {"length": 1, "count": 3}]
     rules = rules_of(rows=8, columns=8, fleet=ships)
     for seed in range(20):
-        fleet = DensityStrategy().place(rules, Random(seed))
+        fleet = Bot1Strategy().place(rules, Random(seed))
         validate_fleet(rules, fleet)

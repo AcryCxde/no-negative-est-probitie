@@ -1,7 +1,6 @@
 """Какие расстановки сложнее найти: среднее число выстрелов стрелка до победы (больше — лучше нам).
 
 Запуск: PYTHONPATH=. uv run python tools/bench_placement.py [партий]
-«HARD model» — модель встроенного бота (tools/hard_model.py): детерминирована, сид не влияет.
 """
 
 import statistics
@@ -13,12 +12,9 @@ from seabattle.model import Cell, Fleet, Rules
 from seabattle.placement import random_fleet
 from seabattle.strategy import Strategy
 from strategies.baseline import BaselineStrategy
-from strategies.compact import compact_fleet
 from strategies.density import DensityStrategy
-from strategies.hard_fleets import hard_fleet
 from tests.fake_platform import rules_of
 from tools.bench_strategy import shots_to_win
-from tools.hard_model import HardModel
 
 Family = Callable[[Rules, Random], Fleet]
 
@@ -70,9 +66,9 @@ def diagonal_half(rules: Rules, rng: Random) -> Fleet:
 
 FAMILIES: dict[str, Family] = {
     "uniform": uniform,
-    "half board": compact_fleet,
-    "tuned vs HARD": hard_fleet,
     "free cols 0-4": columns_free(5),
+    "free cols 0-5": columns_free(6),
+    "free cols 0-6": columns_free(7),
 }
 
 
@@ -82,7 +78,6 @@ def main() -> None:
     shooters: dict[str, Callable[[], Strategy]] = {
         "baseline": BaselineStrategy,
         "density": DensityStrategy,
-        "HARD model": HardModel,
     }
     for family, make in FAMILIES.items():
         fleets = [make(rules, Random(50_000 + i)) for i in range(games)]

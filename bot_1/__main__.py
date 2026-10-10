@@ -11,7 +11,8 @@ from seabattle.connection import FatalConnectionError, run_forever
 from seabattle.journal import DirectoryJournal
 from seabattle.logs import setup_logging
 from seabattle.runner import BotRunner, ModeRequest
-from strategies.density import DensityStrategy
+
+from bot_1.strategy import Bot1Strategy
 
 log = logging.getLogger("bot_1")
 
@@ -27,7 +28,7 @@ async def main() -> int:
     setup_logging(config.log_level)
     journal = DirectoryJournal(Path(__file__).with_name("matches"))
     runner = BotRunner(
-        DensityStrategy(),
+        Bot1Strategy(),
         ModeRequest(config.mode, config.opponent),
         journal=journal,
         max_matches=config.max_matches,

@@ -1,6 +1,6 @@
 """Расстановки против HARD по журналам партий: доли побед, выстрелы соперника, сверка модели HARD.
 
-Запуск: PYTHONPATH=. uv run python tools/analyze_matches.py bot_1/matches
+Запуск: PYTHONPATH=. uv run python bot_1/tools/analyze_matches.py bot_1/matches
 Берутся только партии против HARD. Партии с пропущенными ходами (сеть) в сравнении не участвуют.
 """
 
@@ -12,8 +12,9 @@ from pathlib import Path
 
 from seabattle.model import Cell, Fleet, Ship, ShotResult
 from tools.bench_strategy import play_out
-from tools.hard_model import HardModel
-from tools.show_matches import SIZE, Match, load
+
+from bot_1.tools.hard_model import HardModel
+from bot_1.tools.show_matches import SIZE, Match, load
 
 Z_95 = 1.96
 HITS_FOR_COMPARISON = 10

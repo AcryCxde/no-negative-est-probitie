@@ -1,4 +1,4 @@
-"""Стрельба по карте плотности, расстановка из набора против HARD (strategies/hard_fleets.py).
+"""Стрельба по карте плотности, расстановка в половине поля.
 
 Стреляем в клетку, где проходит больше всего допустимых положений кораблей.
 
@@ -15,7 +15,7 @@ from seabattle.model import Cell, Fleet, Rules
 from seabattle.state import ShotView
 from seabattle.strategy import legal_cells
 from strategies.board import Group, known_empty, remaining_lengths, ship_groups
-from strategies.hard_fleets import hard_fleet
+from strategies.compact import compact_fleet
 
 Placement = tuple[Cell, ...]
 
@@ -34,28 +34,17 @@ def _placements(rows: int, columns: int, length: int) -> tuple[Placement, ...]:
 
 class DensityStrategy:
     def place(self, rules: Rules, rng: Random) -> Fleet:
-        return hard_fleet(rules, rng)
+        return compact_fleet(rules, rng)
 
     def choose_shot(self, view: ShotView, rng: Random, deadline: float) -> Cell:  # noqa: ARG002
-        best = best_cells(view)
-        if not best:
+        groups = ship_groups(view)
+        remaining = remaining_lengths(view, groups)
+        scores = _target_scores(view, groups, remaining) or _search_scores(view, groups, remaining)
+        if not scores:
             free = legal_cells(view)
             return rng.choice(free) if free else Cell(0, 0)
-        return rng.choice(best)
-
-
-def best_cells(view: ShotView) -> list[Cell]:
-    """Клетки с наибольшей плотностью, по возрастанию (строка, столбец); пусто, если считать нечего.
-
-    Встроенный HARD стреляет ровно в первую из них: так он сошёлся с журналами всех партий.
-    """
-    groups = ship_groups(view)
-    remaining = remaining_lengths(view, groups)
-    scores = _target_scores(view, groups, remaining) or _search_scores(view, groups, remaining)
-    if not scores:
-        return []
-    best = max(scores.values())
-    return sorted(cell for cell, score in scores.items() if score == best)
+        best = max(scores.values())
+        return rng.choice(sorted(cell for cell, score in scores.items() if score == best))
 
 
 def _halo(cells: frozenset[Cell]) -> set[Cell]:

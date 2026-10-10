@@ -1,7 +1,7 @@
 """Подбор расстановок против модели HARD: отжиг по числу выстрелов, которые HARD тратит на флот.
 
-Запуск: PYTHONPATH=. uv run python tools/search_fleets.py [цепочек] [шагов в цепочке]
-Печатает «выстрелов HARD» и флот в формате strategies/hard_fleets.py, лучшие первыми.
+Запуск: PYTHONPATH=. uv run python bot_1/tools/search_fleets.py [цепочек] [шагов в цепочке]
+Печатает «выстрелов HARD» и флот в формате bot_1/hard_fleets.py, лучшие первыми.
 """
 
 import math
@@ -14,7 +14,8 @@ from seabattle.model import Cell, Fleet, Ship
 from seabattle.placement import random_fleet
 from tests.fake_platform import rules_of
 from tools.bench_strategy import shots_to_win
-from tools.hard_model import HardModel
+
+from bot_1.tools.hard_model import HardModel
 
 START_TEMPERATURE = 3.0
 SIZE = 10
@@ -72,7 +73,7 @@ def anneal(job: tuple[int, int]) -> tuple[int, Fleet]:
 
 
 def encoded(fleet: Fleet) -> str:
-    """Корабль — «строка,столбец,длина» и h/v; формат читает strategies.hard_fleets."""
+    """Корабль — «строка,столбец,длина» и h/v; формат читает bot_1.hard_fleets."""
     return " ".join(
         f"{ship.cells[0].row},{ship.cells[0].column},{ship.length}"
         f"{'v' if ship.length > 1 and ship.cells[0].column == ship.cells[1].column else 'h'}"
