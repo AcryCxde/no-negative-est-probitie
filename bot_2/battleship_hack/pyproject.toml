@@ -1,0 +1,14 @@
+[project]
+name = "battleship-hack"
+version = "0.1.0"
+description = "bot_2: training client and battle telemetry"
+readme = "README.md"
+requires-python = ">=3.12.9,<3.13"
+dependencies = ["websockets>=15,<16", "python-dotenv>=1,<2", "duckdb>=1.4,<2", "httpx>=0.28,<0.29"]
+
+[project.scripts]
+battleship-hack = "battleship_hack.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

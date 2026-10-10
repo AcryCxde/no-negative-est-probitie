@@ -1,0 +1,11 @@
+# Only this participant's bot. TRAINING also changes Elo on this platform.
+url = "wss://hackathon.no-offence.ru/api/v1/bots/connection"
+api_url = "https://hackathon.no-offence.ru"
+mode = "TRAINING"
+opponent = "MEDIUM"
+strategy = "fleet-mc"
+matches = 1
+max_seconds = 360
+reconnect_attempts = 3
+use_bonuses = true
+data_dir = "data/bot2"
