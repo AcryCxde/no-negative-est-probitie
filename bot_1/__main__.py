@@ -10,6 +10,7 @@ from seabattle.config import ConfigError, load_config
 from seabattle.connection import FatalConnectionError, run_forever
 from seabattle.journal import DirectoryJournal
 from seabattle.logs import setup_logging
+from seabattle.model import BotMode, BuiltInBot
 from seabattle.runner import BotRunner, ModeRequest
 
 from bot_1.strategy import Bot1Strategy
@@ -28,7 +29,9 @@ async def main() -> int:
     setup_logging(config.log_level)
     journal = DirectoryJournal(Path(__file__).with_name("matches"))
     runner = BotRunner(
-        Bot1Strategy(),
+        Bot1Strategy(
+            tuned_for_hard=config.mode is BotMode.TRAINING and config.opponent is BuiltInBot.HARD
+        ),
         ModeRequest(config.mode, config.opponent),
         journal=journal,
         max_matches=config.max_matches,

@@ -53,7 +53,9 @@ def test_hard_needs_far_more_shots_than_on_a_random_fleet(fleet: Fleet) -> None:
 
 
 def test_strategy_places_from_the_set() -> None:
-    placed = {Bot1Strategy().place(rules_of(), Random(seed)) for seed in range(100)}
+    placed = {
+        Bot1Strategy(tuned_for_hard=True).place(rules_of(), Random(seed)) for seed in range(100)
+    }
     assert placed <= set(FLEETS)
     assert len(placed) > 1
 
@@ -62,5 +64,13 @@ def test_other_board_gets_a_valid_random_fleet() -> None:
     ships = [{"length": 3, "count": 2}, {"length": 1, "count": 3}]
     rules = rules_of(rows=8, columns=8, fleet=ships)
     for seed in range(20):
-        fleet = Bot1Strategy().place(rules, Random(seed))
+        fleet = Bot1Strategy(tuned_for_hard=True).place(rules, Random(seed))
         validate_fleet(rules, fleet)
+
+
+def test_against_teams_the_fleet_is_not_from_the_known_set() -> None:
+    placed = {
+        Bot1Strategy(tuned_for_hard=False).place(rules_of(), Random(seed)) for seed in range(50)
+    }
+    assert placed.isdisjoint(FLEETS)
+    assert len(placed) == 50
