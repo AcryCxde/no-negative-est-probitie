@@ -33,8 +33,8 @@ def _placements(rows: int, columns: int, length: int) -> tuple[Placement, ...]:
 
 
 class DensityStrategy:
-    def place(self, rules: Rules, rng: Random) -> Fleet:  # noqa: ARG002
-        return hard_fleet(rng)
+    def place(self, rules: Rules, rng: Random) -> Fleet:
+        return hard_fleet(rules, rng)
 
     def choose_shot(self, view: ShotView, rng: Random, deadline: float) -> Cell:  # noqa: ARG002
         best = best_cells(view)

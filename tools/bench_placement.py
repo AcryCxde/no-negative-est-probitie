@@ -71,7 +71,7 @@ def diagonal_half(rules: Rules, rng: Random) -> Fleet:
 FAMILIES: dict[str, Family] = {
     "uniform": uniform,
     "half board": compact_fleet,
-    "tuned vs HARD": lambda _rules, rng: hard_fleet(rng),
+    "tuned vs HARD": hard_fleet,
     "free cols 0-4": columns_free(5),
 }
 

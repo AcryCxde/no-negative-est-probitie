@@ -56,3 +56,11 @@ def test_strategy_places_from_the_set() -> None:
     placed = {DensityStrategy().place(rules_of(), Random(seed)) for seed in range(100)}
     assert placed <= set(FLEETS)
     assert len(placed) > 1
+
+
+def test_other_board_gets_a_valid_random_fleet() -> None:
+    ships = [{"length": 3, "count": 2}, {"length": 1, "count": 3}]
+    rules = rules_of(rows=8, columns=8, fleet=ships)
+    for seed in range(20):
+        fleet = DensityStrategy().place(rules, Random(seed))
+        validate_fleet(rules, fleet)

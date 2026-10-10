@@ -8,7 +8,8 @@ HARD стреляет детерминированно (карта плотно�
 
 from random import Random
 
-from seabattle.model import Cell, Fleet, Ship
+from seabattle.model import Cell, Fleet, Rules, Ship
+from seabattle.placement import PlacementError, random_fleet, validate_fleet
 
 # «строка,столбец,длина» и h/v; флоты уже разведены по правилу касания
 ENCODED = (
@@ -58,5 +59,15 @@ def decode(text: str) -> Fleet:
 FLEETS = tuple(decode(text) for text in ENCODED)
 
 
-def hard_fleet(rng: Random) -> Fleet:
-    return rng.choice(FLEETS)
+def fits(rules: Rules, fleet: Fleet) -> bool:
+    try:
+        validate_fleet(rules, fleet)
+    except PlacementError:
+        return False
+    return True
+
+
+def hard_fleet(rules: Rules, rng: Random) -> Fleet:
+    """Набор рассчитан на классику 10×10; при других размерах поля и составе флота — случайная."""
+    suitable = [fleet for fleet in FLEETS if fits(rules, fleet)]
+    return rng.choice(suitable) if suitable else random_fleet(rules, rng)
